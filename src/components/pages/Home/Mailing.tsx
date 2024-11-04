@@ -1,16 +1,14 @@
 const Mailing = () => {
   return (
     <div className="container mt-20 relative ">
-      {/* BG */}
-      <div className="bg-[#f3f3f3] h-[555px] w-2/3 absolute right-0 -bottom-14" />
 
-      <div className="flex items-center gap-14 relative z-10">
+      <div className="flex items-center gap-14 relative z-10 flex-col lg:flex-row">
         <div>
           <img src="/mailing.jpg" alt="Mailing" />
         </div>
-        <div className="max-w-[530px]">
-          <h4 className="text-5xl">Подпишитесь на рассылку</h4>
-          <p className="text-xl text-[#5a5a5a] mt-4">
+        <div className=" lg:max-w-[530px]">
+          <h4 className="text-3xl md:text-5xl">Подпишитесь на рассылку</h4>
+          <p className="text-lg md:text-xl text-[#5a5a5a] mt-4">
             Узнай первым о старте скидок и специальных предложений!
           </p>
           <form className="mt-4 flex flex-col w-full">
