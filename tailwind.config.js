@@ -8,6 +8,7 @@ export default {
         grey: "var(--grey)",
         "grey-light": "var(--grey-light)",
         red: "var(--red)",
+        lightGray: "var(--grey-light)"
       },
       fontFamily: {
         roboto: "var(--font-family)",

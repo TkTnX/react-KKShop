@@ -37,3 +37,14 @@ body {
   margin-top: 20px;
   position: relative;
 }
+
+.sliderWithSale .swiper-slide {
+  opacity: 0.5;
+  transition: transform 0.3s, opacity 0.3s;
+}
+
+.sliderWithSale .swiper-slide-active {
+  transform: scale(1.1);
+  opacity: 1;
+  width: 990px;
+}
