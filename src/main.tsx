@@ -10,6 +10,7 @@ import {
   Contacts,
   Delivery,
   Home,
+  SingleProduct,
 } from "./routes";
 import RootLayout from "./layout/RootLayout";
 
@@ -24,6 +25,10 @@ const router = createBrowserRouter([
       {
         path: "/catalog",
         element: <Catalog />,
+      },
+      {
+        path: "/catalog/:id",
+        element: <SingleProduct />,
       },
       {
         path: "/club",

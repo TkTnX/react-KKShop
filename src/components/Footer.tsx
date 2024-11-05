@@ -3,7 +3,7 @@ import { footerNavigation, socials } from "../contants";
 
 const Footer = () => {
   return (
-    <footer className="container mt-[77px] pb-6">
+    <footer className="container mt-[77px] pb-6 ">
       {/* TOP */}
       <div className="grid grid-cols-1 text-center vsm:text-left vsm:grid-cols-2 sm:grid-cols-3 gap-4 lg:flex items-start justify-between">
         {/* SECTION 1 */}
@@ -25,15 +25,15 @@ const Footer = () => {
 
         {/* SECTION 2, 3 */}
         {footerNavigation.map((item) => (
-          <div>
+          <div key={item.title}>
             <h4 className="text-xl">{item.title}</h4>
             <ul className="flex flex-col gap-3 mt-3">
-              {item.items.map((item) => {
+              {item.items.map((item, index) => {
                 if (typeof item === "string") {
                   return (
                     <li
                       className="text-[#4e4e4e] text-sm hover:opacity-80"
-                      key={item}
+                      key={index}
                     >
                       <Link to="/catalog">{item}</Link>
                     </li>

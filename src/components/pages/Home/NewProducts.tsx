@@ -1,11 +1,21 @@
+import { useRef } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import "swiper/swiper-bundle.css";
-import { useRef } from "react";
-import { products } from "../../../contants";
 import Product from "../../Product";
-const NewProducts = () => {
+import { ProductType } from "../../../types";
+const NewProducts = ({
+  products,
+  loading,
+  error,
+}: {
+  products: ProductType[];
+  loading: boolean;
+  error: boolean;
+}) => {
   const swiperRef = useRef(null);
+
+  if (error && !loading) return null;
 
   return (
     <div className="container mt-16">
@@ -60,14 +70,22 @@ const NewProducts = () => {
           },
           480: {
             slidesPerView: 2,
-          }
+          },
         }}
       >
-        {products.map((product) => (
-          <SwiperSlide key={product.id}>
-            <Product product={product} />
-          </SwiperSlide>
-        ))}
+        {loading &&
+          [...new Array(5)].map((_, index) => (
+            <SwiperSlide key={index}>
+              <div className="h-[520px] w-full bg-lightGray" />
+            </SwiperSlide>
+          ))}
+        {!loading &&
+          products.length > 0 &&
+          products.map((product) => (
+            <SwiperSlide key={product.id}>
+              <Product product={product} />
+            </SwiperSlide>
+          ))}
       </Swiper>
     </div>
   );

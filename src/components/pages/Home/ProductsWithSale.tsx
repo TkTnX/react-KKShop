@@ -2,12 +2,22 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import "swiper/swiper-bundle.css";
 
-import { products } from "../../../contants";
 import { useRef } from "react";
 import Product from "../../Product";
+import { ProductType } from "../../../types";
 
-const ProductsWithSale = () => {
+const ProductsWithSale = ({
+  products,
+  loading,
+  error,
+}: {
+  products: ProductType[];
+  loading: boolean;
+  error: boolean;
+}) => {
   const swiperRef = useRef(null);
+
+  if (error && !loading) return null;
 
   return (
     <div className=" mt-16">
@@ -48,27 +58,34 @@ const ProductsWithSale = () => {
         modules={[Navigation]}
         spaceBetween={20}
         slidesPerView={1.2}
-        loop={true}
         centeredSlides={true}
+        initialSlide={3}
         breakpoints={{
           840: {
             spaceBetween: 56,
-            slidesPerView: 2.2
+            slidesPerView: 2.2,
           },
           680: {
-            slidesPerView: 2.2
-          }
-
+            slidesPerView: 2.2,
+          },
         }}
         className="mt-8 sliderWithSale"
       >
-        {products
-          .filter((product) => product.isSale)
-          .map((product) => (
-            <SwiperSlide key={product.id}>
-              <Product product={product} />
+        {loading &&
+          [...new Array(5)].map((_, index) => (
+            <SwiperSlide key={index}>
+              <div className="h-[520px] w-full bg-lightGray" />
             </SwiperSlide>
           ))}
+        {!loading &&
+          products.length > 0 &&
+          products
+            .filter((product) => product.isSale)
+            .map((product) => (
+              <SwiperSlide key={product.id}>
+                <Product product={product} />
+              </SwiperSlide>
+            ))}
       </Swiper>
     </div>
   );
