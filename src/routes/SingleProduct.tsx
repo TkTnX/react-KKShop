@@ -4,6 +4,7 @@ import { ProductType } from "../types";
 import { useProductsStore } from "../store/useProducts";
 import InteractiveButtons from "../components/pages/SingleProduct/InteractiveButtons";
 
+
 const SingleProduct = () => {
   const [product, setProduct] = useState<ProductType>();
   const { fetchProduct, loading, error } = useProductsStore();
@@ -41,19 +42,35 @@ const SingleProduct = () => {
 
       <div className="mt-9 flex items-start flex-col sm:flex-row gap-16">
         {/* LEFT */}
-        <div className="w-full sm:w-auto md:w-[740px] md:h-[585px] flex items-center justify-center">
-          {loading && (
-            <div className="bg-lightGray w-full h-full flex items-center justify-center" />
-          )}
-          <img src={product.img} alt={product.title} />
+        <div className="w-full xl:w-auto">
+          <div className="w-full sm:w-auto lg:w-[540px] xl:w-[740px] lg:h-[385px] xl:h-[585px] flex items-center justify-center">
+            {loading && (
+              <div className="bg-lightGray w-full h-full flex items-center justify-center" />
+            )}
+            <img src={product.img} alt={product.title} />
+          </div>
+          <div className="hidden sm:flex flex-col lg:flex-row items-center gap-7 mt-8">
+            <div className="flex items-center gap-3 lg:max-w-52">
+              <img src="/product-page/01.png" alt="img" />
+              <p className="text-sm">Бесплатная доставка от 1000 руб</p>
+            </div>
+            <div className="flex items-center gap-3 lg:max-w-52">
+              <img src="/product-page/02.png" alt="img" />
+              <p className="text-sm">Доставка по всей территории РФ</p>
+            </div>
+            <div className="flex items-center gap-3 lg:max-w-52">
+              <img src="/product-page/03.png" alt="img" />
+              <p className="text-sm">Гарантия качества продукции </p>
+            </div>
+          </div>
         </div>
         {/* RIGHT */}
         {loading ? (
           <div className="w-full h-[336px] bg-lightGray" />
         ) : (
-          <div>
+          <div className="min-w-64">
             <p className="text-sm text-[#434343]">{product.desc}</p>
-            <h2 className="text-2xl md:text-5xl mt-2 tracking-[0.04em] flex items-center gap-2 flex-wrap">
+            <h2 className="text-2xl md:text-5xl mt-2 tracking-[0.04em] flex items-center gap-2 flex-wrap font-bold">
               <span className="text-pink">{firstWordOfTitle}</span>
               {titleWithoutFirstWord}
             </h2>
