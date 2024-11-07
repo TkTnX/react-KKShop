@@ -33,120 +33,6 @@ export const aboutItems = [
   "Доставка по всей России",
 ];
 
-export const products = [
-  {
-    id: 1,
-    img: "/products/01.png",
-    title: "Slimming Gel Body",
-    desc: "Гель для тела для похудения",
-    isSale: true,
-    priceWithSale: 2480,
-    price: 3579,
-    size: 1500,
-    country: "Южная Корея",
-    typeOfCare: "Для домашнего ухода, Для косметологов",
-    hairType:
-      "Жирная кожа головы, Непослушные волосы, Нормальные волосы, Окрашенные волосы, Сухие и поврежденные волосы",
-  },
-  {
-    id: 2,
-    img: "/products/02.png",
-    title: "Slimming Gel Body 2",
-    desc: "Гель для тела для похудения",
-    isSale: false,
-    price: 2480,
-    size: 1500,
-    country: "Южная Корея",
-    typeOfCare: "Для домашнего ухода, Для косметологов",
-    hairType:
-      "Жирная кожа головы, Непослушные волосы, Нормальные волосы, Окрашенные волосы, Сухие и поврежденные волосы",
-  },
-  {
-    id: 3,
-    img: "/products/01.png",
-    title: "Slimming Gel Body 3",
-    desc: "Гель для тела для похудения",
-    isSale: false,
-    price: 3579,
-    size: 1500,
-    country: "Южная Корея",
-    typeOfCare: "Для домашнего ухода, Для косметологов",
-    hairType:
-      "Жирная кожа головы, Непослушные волосы, Нормальные волосы, Окрашенные волосы, Сухие и поврежденные волосы",
-  },
-  {
-    id: 4,
-    img: "/products/03.png",
-    title: "Slimming Gel Body 4",
-    desc: "Гель для тела для похудения",
-    isSale: false,
-    price: 5500,
-    size: 1500,
-    country: "Южная Корея",
-    typeOfCare: "Для домашнего ухода, Для косметологов",
-    hairType:
-      "Жирная кожа головы, Непослушные волосы, Нормальные волосы, Окрашенные волосы, Сухие и поврежденные волосы",
-  },
-  {
-    id: 5,
-    img: "/products/01.png",
-    title: "Slimming Gel Body",
-    desc: "Гель для тела для похудения",
-    isSale: true,
-    priceWithSale: 2480,
-    price: 3579,
-    size: 1500,
-    country: "Южная Корея",
-    typeOfCare: "Для домашнего ухода, Для косметологов",
-    hairType:
-      "Жирная кожа головы, Непослушные волосы, Нормальные волосы, Окрашенные волосы, Сухие и поврежденные волосы",
-  },
-  {
-    id: 6,
-    img: "/products/02.png",
-    title: "Slimming Gel Body 2",
-    desc: "Гель для тела для похудения",
-    isSale: true,
-    price: 2480,
-    priceWithSale: 1500,
-
-    size: 1500,
-    country: "Южная Корея",
-    typeOfCare: "Для домашнего ухода, Для косметологов",
-    hairType:
-      "Жирная кожа головы, Непослушные волосы, Нормальные волосы, Окрашенные волосы, Сухие и поврежденные волосы",
-  },
-  {
-    id: 7,
-    img: "/products/01.png",
-    title: "Slimming Gel Body 3",
-    desc: "Гель для тела для похудения",
-    isSale: true,
-    priceWithSale: 2480,
-    price: 3579,
-    size: 1500,
-    country: "Южная Корея",
-    typeOfCare: "Для домашнего ухода, Для косметологов",
-    hairType:
-      "Жирная кожа головы, Непослушные волосы, Нормальные волосы, Окрашенные волосы, Сухие и поврежденные волосы",
-  },
-  {
-    id: 8,
-    img: "/products/03.png",
-    title: "Slimming Gel Body 4",
-    desc: "Гель для тела для похудения",
-    isSale: true,
-    price: 5500,
-    priceWithSale: 2480,
-
-    size: 1500,
-    country: "Южная Корея",
-    typeOfCare: "Для домашнего ухода, Для косметологов",
-    hairType:
-      "Жирная кожа головы, Непослушные волосы, Нормальные волосы, Окрашенные волосы, Сухие и поврежденные волосы",
-  },
-];
-
 export const footerNavigation = [
   {
     title: "Каталог",
@@ -202,4 +88,19 @@ export const socials = [
   "/socials/viber.png",
   "/socials/instagramm.png",
   "/socials/vk.png",
+];
+
+export const sortByValues = [
+  {
+    name: "De Lavo Garden",
+    value: "de-lavo-garden",
+  },
+  {
+    name: "Dermaphilia",
+    value: "dermaphilia",
+  },
+  {
+    name: "Skindom",
+    value: "skindom",
+  },
 ];

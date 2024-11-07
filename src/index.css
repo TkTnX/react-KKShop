@@ -48,3 +48,24 @@ body {
   opacity: 1;
   width: 990px;
 }
+
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  text-indent: 1px;
+  text-overflow: "";
+}
+
+.description {
+    display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  max-width: 50%;
+}
+
+@layer base {
+  :root {
+    --radius: 0.5rem;
+  }
+}

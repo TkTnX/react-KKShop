@@ -7,7 +7,7 @@ interface ProductsStore {
   loading: boolean;
   error: boolean;
 
-  fetchProducts: () => void;
+  fetchProducts: (sortURL?: string) => void;
   fetchProduct: (id: string) => Promise<ProductType>;
 }
 
@@ -16,11 +16,11 @@ export const useProductsStore = create<ProductsStore>((set) => ({
   loading: false,
   error: false,
 
-  fetchProducts: async () => {
+  fetchProducts: async (sortURL) => {
     try {
       set({ loading: true });
       const { data } = await axios.get(
-        `${import.meta.env.VITE_MOKKY_URL}/products`
+        `${import.meta.env.VITE_MOKKY_URL}/products${sortURL || ""}`
       );
 
       set({ products: data, error: false });

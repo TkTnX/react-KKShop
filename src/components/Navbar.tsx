@@ -1,7 +1,13 @@
 import { Link, useLocation } from "react-router-dom";
 import { navbar } from "../contants";
 
-const Navbar = ({ size }: { size: "sm" | "lg" }) => {
+const Navbar = ({
+  size,
+  setOpen,
+}: {
+  size: "sm" | "lg";
+  setOpen?: (b: boolean) => void;
+}) => {
   const location = useLocation();
   return (
     <nav
@@ -18,6 +24,7 @@ const Navbar = ({ size }: { size: "sm" | "lg" }) => {
       >
         {navbar.map((item) => (
           <li
+            onClick={() => setOpen && setOpen(false)}
             className={`text-lg ${
               location.pathname === item.link ? "border-b-2 border-b-black" : ""
             }`}

@@ -47,7 +47,7 @@ const MobileMenu = () => {
     <>
       <button
         onClick={() => setOpen(!open)}
-        className="w-10 h-8 flex flex-col justify-between relative z-20 xl:hidden"
+        className="w-10 h-8 flex flex-col justify-between relative z-50 xl:hidden"
       >
         <motion.span
           variants={spanVariant1}
@@ -71,9 +71,9 @@ const MobileMenu = () => {
           variants={listVariant}
           animate="open"
           initial="closed"
-          className="bg-pink fixed top-0 left-0 w-full h-full"
+          className="bg-pink fixed top-0 left-0 w-full h-full z-10"
         >
-          <Navbar size="sm" />
+          <Navbar setOpen={setOpen} size="sm" />
         </motion.div>
       )}
     </>
