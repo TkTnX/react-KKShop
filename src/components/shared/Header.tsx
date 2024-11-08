@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
-import ChooseCity from "./ChooseCity";
-import UserInteraction from "./UserInteraction";
-import Navbar from "./Navbar";
+import ChooseCity from "../shared/ChooseCity";
+import UserInteraction from "../shared/UserInteraction";
+import Navbar from "../shared/Navbar";
 import MobileMenu from "./MobileMenu";
 
 const Header = () => {

@@ -1,3 +1,5 @@
+import Cart from "./Cart/Cart";
+
 const UserInteraction = () => {
   return (
     <ul className="flex items-center gap-5">
@@ -17,9 +19,11 @@ const UserInteraction = () => {
         </button>
       </li>
       <li>
-        <button>
-          <img src="/cart.svg" alt="Cart" />
-        </button>
+        <Cart>
+          <button>
+            <img src="/cart.svg" alt="Cart" />
+          </button>
+        </Cart>
       </li>
     </ul>
   );

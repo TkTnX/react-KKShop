@@ -1,7 +1,7 @@
 import { useEffect } from "react";
-import { useProductsStore } from "../../../store/useProducts";
-import Product from "../../Product";
-import { useChangeParams } from "../../../hooks/useChangeParams";
+import { useProductsStore } from "../../../../store/useProducts";
+import Product from "../../../shared/Product";
+import { useChangeParams } from "../../../../hooks/useChangeParams";
 
 const CatalogItems = ({
   sortBy,

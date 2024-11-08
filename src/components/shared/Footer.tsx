@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { footerNavigation, socials } from "../contants";
+import { footerNavigation, socials } from "../../contants";
 
 const Footer = () => {
   return (

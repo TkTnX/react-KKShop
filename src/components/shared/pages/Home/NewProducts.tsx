@@ -1,12 +1,10 @@
+import { useRef } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import "swiper/swiper-bundle.css";
-
-import { useRef } from "react";
+import { ProductType } from "../../../../types";
 import Product from "../../Product";
-import { ProductType } from "../../../types";
-
-const ProductsWithSale = ({
+const NewProducts = ({
   products,
   loading,
   error,
@@ -20,10 +18,10 @@ const ProductsWithSale = ({
   if (error && !loading) return null;
 
   return (
-    <div className=" mt-16">
+    <div className="container mt-16">
       {/* TOP */}
-      <div className="flex items-center justify-between container">
-        <h4 className="text-xl md:text-3xl">Акционные товары</h4>
+      <div className="flex items-center justify-between">
+        <h4 className="text-xl md:text-3xl">Новинки</h4>
         {/* buttons */}
         <div className="flex items-center gap-4">
           <button
@@ -38,7 +36,6 @@ const ProductsWithSale = ({
               alt="Next"
             />
           </button>
-
           <button
             className="hover:opacity-60"
             // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -57,19 +54,24 @@ const ProductsWithSale = ({
         onSwiper={(swiper) => (swiperRef.current = swiper)}
         modules={[Navigation]}
         spaceBetween={20}
-        slidesPerView={1.2}
-        centeredSlides={true}
-        initialSlide={3}
+        slidesPerView={1}
+        className="mt-8"
         breakpoints={{
-          840: {
+          1629: {
             spaceBetween: 56,
-            slidesPerView: 2.2,
+            slidesPerView: 4,
           },
-          680: {
-            slidesPerView: 2.2,
+          1515: {
+            slidesPerView: 4,
+            spaceBetween: 15,
+          },
+          740: {
+            slidesPerView: 3,
+          },
+          480: {
+            slidesPerView: 2,
           },
         }}
-        className="mt-8 sliderWithSale"
       >
         {loading &&
           [...new Array(5)].map((_, index) => (
@@ -79,16 +81,14 @@ const ProductsWithSale = ({
           ))}
         {!loading &&
           products.length > 0 &&
-          products
-            .filter((product) => product.isSale)
-            .map((product) => (
-              <SwiperSlide key={product.id}>
-                <Product product={product} />
-              </SwiperSlide>
-            ))}
+          products.map((product) => (
+            <SwiperSlide key={product.id}>
+              <Product product={product} />
+            </SwiperSlide>
+          ))}
       </Swiper>
     </div>
   );
 };
 
-export default ProductsWithSale;
+export default NewProducts;

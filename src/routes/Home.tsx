@@ -1,9 +1,9 @@
 import { useEffect } from "react";
-import About from "../components/pages/Home/About";
-import Hero from "../components/pages/Home/Hero";
-import Mailing from "../components/pages/Home/Mailing";
-import NewProducts from "../components/pages/Home/NewProducts";
-import ProductsWithSale from "../components/pages/Home/ProductsWithSale";
+import About from "../components/shared/pages/Home/About";
+import Hero from "../components/shared/pages/Home/Hero";
+import Mailing from "../components/shared/pages/Home/Mailing";
+import NewProducts from "../components/shared/pages/Home/NewProducts";
+import ProductsWithSale from "../components/shared/pages/Home/ProductsWithSale";
 import { useProductsStore } from "../store/useProducts";
 
 const Home = () => {

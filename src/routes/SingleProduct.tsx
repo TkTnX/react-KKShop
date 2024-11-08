@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, redirect, useParams } from "react-router-dom";
 import { ProductType } from "../types";
 import { useProductsStore } from "../store/useProducts";
-import InteractiveButtons from "../components/pages/SingleProduct/InteractiveButtons";
+import InteractiveButtons from "../components/shared/pages/SingleProduct/InteractiveButtons";
 
 
 const SingleProduct = () => {

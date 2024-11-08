@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { aboutItems } from "../../../contants";
+import { aboutItems } from "../../../../contants";
 const About = () => {
   return (
     <div className="mt-16 container">

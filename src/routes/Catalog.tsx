@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import CatalogItems from "../components/pages/Catalog/CatalogItems";
 import { useState } from "react";
+import CatalogItems from "../components/shared/pages/Catalog/CatalogItems";
 
 const Catalog = () => {
   const [sortBy, setSortBy] = useState<{

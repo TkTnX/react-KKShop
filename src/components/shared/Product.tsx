@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ProductType } from "../types";
+import { ProductType } from "../../types";
 
 const Product = ({
   product,
@@ -19,7 +19,11 @@ const Product = ({
             SELL
           </div>
         )}
-        <img className="h-full object-contain" src={product.img} alt={product.title} />
+        <img
+          className="h-full object-contain"
+          src={product.img}
+          alt={product.title}
+        />
       </Link>
       <div className="mt-3 p-6 pb-9 bg-lightGray">
         <h6 className="font-second font-bold text-xl tracking-[0.07em]">
