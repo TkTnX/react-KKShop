@@ -5,7 +5,9 @@ import Certificates from "./Certificates.tsx";
 import Delivery from "./Delivery.tsx";
 import Contacts from "./Contacts.tsx";
 import Blog from "./Blog.tsx";
-import SingleProduct from "./SingleProduct.tsx"
+import SingleProduct from "./SingleProduct.tsx";
+import SignUp from "./SignUp.tsx";
+import SignIn from "./SignIn.tsx";
 
 export {
   Home,
@@ -16,4 +18,6 @@ export {
   Contacts,
   Blog,
   SingleProduct,
+  SignUp,
+  SignIn,
 };

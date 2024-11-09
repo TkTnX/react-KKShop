@@ -10,11 +10,13 @@ import {
   Contacts,
   Delivery,
   Home,
+  SignIn,
+  SignUp,
   SingleProduct,
 } from "./routes";
 import RootLayout from "./layout/RootLayout";
 import { ToastContainer } from "react-toastify";
- import "react-toastify/dist/ReactToastify.css";
+import "react-toastify/dist/ReactToastify.css";
 
 const router = createBrowserRouter([
   {
@@ -24,6 +26,15 @@ const router = createBrowserRouter([
         path: "/",
         element: <Home />,
       },
+      {
+        path: "/sign-up",
+        element: <SignUp />,
+      },
+      {
+        path: "/sign-in",
+        element: <SignIn />,
+      },
+
       {
         path: "/catalog",
         element: <Catalog />,
@@ -55,8 +66,6 @@ const router = createBrowserRouter([
     ],
   },
 ]);
-
-
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>

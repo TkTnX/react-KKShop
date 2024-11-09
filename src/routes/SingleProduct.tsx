@@ -43,7 +43,7 @@ const SingleProduct = () => {
       <div className="mt-9 flex items-start flex-col sm:flex-row gap-16">
         {/* LEFT */}
         <div className="w-full xl:w-auto">
-          <div className="w-full sm:w-auto lg:w-[540px] xl:w-[740px] lg:h-[385px] xl:h-[585px] flex items-center justify-center">
+          <div className="w-full sm:w-auto lg:w-[540px] xl:w-[740px]  flex items-center justify-center">
             {loading && (
               <div className="bg-lightGray w-full h-full flex items-center justify-center" />
             )}

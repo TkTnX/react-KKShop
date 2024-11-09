@@ -1,4 +1,5 @@
 import Cart from "./Cart/Cart";
+import { Link } from "react-router-dom";
 
 const UserInteraction = () => {
   return (
@@ -14,9 +15,9 @@ const UserInteraction = () => {
         </button>
       </li>
       <li>
-        <button>
+        <Link to="/sign-in">
           <img src="/profile.svg" alt="Profile" />
-        </button>
+        </Link>
       </li>
       <li>
         <Cart>
