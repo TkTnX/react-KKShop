@@ -12,3 +12,5 @@ export interface ProductType {
   hairType: string;
   brand: string;
 }
+
+export type CartItemType = ProductType & { count: number };

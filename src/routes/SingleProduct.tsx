@@ -101,7 +101,7 @@ const SingleProduct = () => {
                 <h6 className="text-2xl font-bold">{product.price} руб</h6>
               )}
             </div>
-            <InteractiveButtons />
+            <InteractiveButtons product={product} />
           </div>
         )}
       </div>

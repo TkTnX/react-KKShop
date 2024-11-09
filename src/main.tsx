@@ -13,6 +13,8 @@ import {
   SingleProduct,
 } from "./routes";
 import RootLayout from "./layout/RootLayout";
+import { ToastContainer } from "react-toastify";
+ import "react-toastify/dist/ReactToastify.css";
 
 const router = createBrowserRouter([
   {
@@ -59,5 +61,6 @@ const router = createBrowserRouter([
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <RouterProvider router={router} />
+    <ToastContainer />
   </StrictMode>
 );

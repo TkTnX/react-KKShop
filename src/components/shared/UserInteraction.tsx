@@ -20,9 +20,7 @@ const UserInteraction = () => {
       </li>
       <li>
         <Cart>
-          <button>
-            <img src="/cart.svg" alt="Cart" />
-          </button>
+          <img src="/cart.svg" alt="Cart" />
         </Cart>
       </li>
     </ul>
