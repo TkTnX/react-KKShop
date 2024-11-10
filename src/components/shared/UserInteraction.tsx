@@ -1,7 +1,10 @@
+import { useUserStore } from "../../store/useUserStore";
 import Cart from "./Cart/Cart";
 import { Link } from "react-router-dom";
 
 const UserInteraction = () => {
+  const currentUser = useUserStore((state) => state.currentUser);
+  console.log(currentUser)
   return (
     <ul className="flex items-center gap-5">
       <li>
@@ -14,11 +17,20 @@ const UserInteraction = () => {
           <img src="/heart.svg" alt="Favorite" />
         </button>
       </li>
-      <li>
-        <Link to="/sign-in">
-          <img src="/profile.svg" alt="Profile" />
-        </Link>
-      </li>
+      {currentUser ? (
+        <li className="h-[31px]">
+          <Link to="/profile">
+            <img src={currentUser.avatarUrl !== "" ? currentUser.avatarUrl : "/profile.svg"} alt="" />
+          </Link>
+        </li>
+      ) : (
+        <li className="h-[31px]">
+          <Link to="/sign-in">
+            <img src="/profile.svg" alt="Profile" />
+          </Link>
+        </li>
+      )}
+
       <li>
         <Cart>
           <img src="/cart.svg" alt="Cart" />

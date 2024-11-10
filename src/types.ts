@@ -14,3 +14,9 @@ export interface ProductType {
 }
 
 export type CartItemType = ProductType & { count: number };
+
+export type RegisterDataType = {
+  name: string;
+  email: string;
+  password: string;
+}

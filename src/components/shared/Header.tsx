@@ -3,8 +3,18 @@ import ChooseCity from "../shared/ChooseCity";
 import UserInteraction from "../shared/UserInteraction";
 import Navbar from "../shared/Navbar";
 import MobileMenu from "./MobileMenu";
+import { useEffect } from "react";
+import { useUserStore } from "../../store/useUserStore";
 
 const Header = () => {
+  const { handleAuthMe } = useUserStore();
+  const token = localStorage.getItem("token");
+  useEffect(() => {
+    if (token) {
+      handleAuthMe(token);
+    }
+  }, []);
+
   return (
     <header className="">
       {/* TOP */}

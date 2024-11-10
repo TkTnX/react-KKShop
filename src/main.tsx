@@ -10,6 +10,7 @@ import {
   Contacts,
   Delivery,
   Home,
+  Profile,
   SignIn,
   SignUp,
   SingleProduct,
@@ -33,6 +34,10 @@ const router = createBrowserRouter([
       {
         path: "/sign-in",
         element: <SignIn />,
+      },
+      {
+        path: "/profile",
+        element: <Profile />,
       },
 
       {
