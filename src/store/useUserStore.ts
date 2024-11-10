@@ -1,19 +1,28 @@
 import axios from "axios";
 import { create } from "zustand";
 import { loginFormType, registerFormType } from "../lib/zod/registerSchema";
+import { UserType } from "../types";
 
 interface UserStore {
-  currentUser: any;
+  currentUser: UserType;
   loading: boolean;
   error: boolean;
 
   handleRegister: (data: registerFormType) => void;
   handleLogin: (data: loginFormType) => void;
   handleAuthMe: (token: string) => void;
+  handleLogout: () => void;
 }
 
 export const useUserStore = create<UserStore>((set) => ({
-  currentUser: {},
+  currentUser: {
+    name: null,
+    email: null,
+    password: null,
+    avatarUrl: null,
+    cartItems: null,
+    id: null,
+  },
   loading: false,
   error: false,
 
@@ -83,5 +92,18 @@ export const useUserStore = create<UserStore>((set) => ({
     } finally {
       set({ loading: false });
     }
+  },
+  handleLogout: () => {
+    localStorage.removeItem("token");
+    set({
+      currentUser: {
+        name: null,
+        email: null,
+        password: null,
+        avatarUrl: null,
+        cartItems: null,
+        id: null,
+      },
+    });
   },
 }));

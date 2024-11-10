@@ -5,9 +5,10 @@ import { useForm } from "react-hook-form";
 import { loginFormType, loginSchema } from "../lib/zod/registerSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "react-toastify";
+import { useEffect } from "react";
 
 const SignIn = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const { handleLogin, currentUser, error, loading } = useUserStore();
   const {
     register,
@@ -20,13 +21,18 @@ const SignIn = () => {
       password: "",
     },
   });
+console.log(currentUser)
+  useEffect(() => {
+    if (currentUser.id || currentUser.token) {
+      navigate("/profile");
+    }
+  }, [currentUser]);
 
   const onSubmit = async (data: loginFormType) => {
     handleLogin(data);
     if (!error || currentUser.token) {
       toast.success("Вы успешно вошли в аккаунт!");
-      navigate("/")
-
+      navigate("/");
     } else toast.error("Что-то пошло не так");
   };
 

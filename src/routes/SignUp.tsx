@@ -5,6 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useUserStore } from "../store/useUserStore";
 import { registerFormType, registerSchema } from "../lib/zod/registerSchema";
 import { toast } from "react-toastify";
+import { useEffect } from "react";
 const SignUp = () => {
   const navigate = useNavigate();
   const { handleRegister, currentUser, error, loading } = useUserStore();
@@ -20,6 +21,12 @@ const SignUp = () => {
       password: "",
     },
   });
+
+  useEffect(() => {
+    if (currentUser.id || currentUser.token) {
+      navigate("/profile");
+    }
+  }, [currentUser]);
 
   const onSubmit: SubmitHandler<registerFormType> = (data) => {
     handleRegister(data);

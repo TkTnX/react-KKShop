@@ -15,8 +15,12 @@ export interface ProductType {
 
 export type CartItemType = ProductType & { count: number };
 
-export type RegisterDataType = {
-  name: string;
-  email: string;
-  password: string;
-}
+export type UserType = {
+  name: string | null;
+  email: string | null;
+  password: string | null;
+  avatarUrl: string | null;
+  cartItems: CartItemType[] | null;
+  id: number | null;
+  token?: string;
+};

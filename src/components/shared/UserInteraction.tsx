@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 
 const UserInteraction = () => {
   const currentUser = useUserStore((state) => state.currentUser);
-  console.log(currentUser)
   return (
     <ul className="flex items-center gap-5">
       <li>
@@ -17,10 +16,15 @@ const UserInteraction = () => {
           <img src="/heart.svg" alt="Favorite" />
         </button>
       </li>
-      {currentUser ? (
+      {currentUser.id ? (
         <li className="h-[31px]">
           <Link to="/profile">
-            <img src={currentUser.avatarUrl !== "" ? currentUser.avatarUrl : "/profile.svg"} alt="" />
+            <img
+              src={
+                currentUser.avatarUrl ? currentUser.avatarUrl : "/profile.svg"
+              }
+              alt="profile"
+            />
           </Link>
         </li>
       ) : (
