@@ -65,7 +65,7 @@ export const useUserStore = create<UserStore>((set) => ({
         password: data.password,
       });
       if (auth.status === 201) {
-        set({ currentUser: auth.data });
+        set({ currentUser: auth.data.data });
         localStorage.setItem("token", auth.data.token);
       }
     } catch (error) {

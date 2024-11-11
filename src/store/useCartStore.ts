@@ -1,6 +1,8 @@
 import { create } from "zustand";
 import { CartItemType, ProductType } from "../types";
 import { changeTotalPrice } from "../lib/changeTotalPrice";
+import axios from "axios";
+import { fetchCurrentUser } from "../lib/fetchCurrentUser";
 
 interface CartStore {
   cartItems: CartItemType[];
@@ -22,12 +24,21 @@ export const useCartStore = create<CartStore>((set, get) => ({
   loading: false,
   error: false,
 
-  addToCart: (product) => {
+  addToCart: async (product) => {
+    const currentUser = await fetchCurrentUser();
+
+    if (!currentUser) {
+      set({ error: true });
+      return null;
+    }
     const findProductInCart = get().cartItems.some(
       (item) => item.id === product.id
     );
+    const findProductInUserCart = currentUser.cartItems.some(
+      (item: ProductType) => item.id === product.id
+    );
     //   Если товар найден - увеличиваем его количество
-    if (findProductInCart) {
+    if (findProductInCart || findProductInUserCart) {
       set((state) => ({
         ...state,
         cartItems: state.cartItems.map((item) =>
@@ -39,6 +50,16 @@ export const useCartStore = create<CartStore>((set, get) => ({
       set((state) => ({
         ...state,
         cartItems: [...state.cartItems, { ...product, count: 1 }],
+      }));
+      // Добавляем товар в БД
+      const newItems = await axios.patch(
+        `${import.meta.env.VITE_MOKKY_URL}/users/${currentUser.id}`,
+        { cartItems: [...currentUser.cartItems, { ...product, count: 1 }] }
+      );
+
+      set((state) => ({
+        ...state,
+        cartItems: newItems.data.cartItems,
       }));
     }
 
@@ -64,10 +85,25 @@ export const useCartStore = create<CartStore>((set, get) => ({
     }
   },
 
-  removeFromCart: (product) => {
+  removeFromCart: async (product) => {
+    const currentUser = await fetchCurrentUser();
     set({
       cartItems: get().cartItems.filter((item) => item.id !== product.id),
     });
+
+    // Удаляем товар из БД
+
+    const newItems = await axios.patch(
+      `${import.meta.env.VITE_MOKKY_URL}/users/${currentUser.id}`,
+      {
+        cartItems: get().cartItems.filter((item) => item.id !== product.id),
+      }
+    );
+
+    set((state) => ({
+      ...state,
+      cartItems: newItems.data.cartItems,
+    }));
 
     changeTotalPrice({ set, product, type: "decrease" });
 
@@ -88,7 +124,9 @@ export const useCartStore = create<CartStore>((set, get) => ({
     }));
   },
 
-  decreaseCount: (product) => {
+  decreaseCount: async (product) => {
+    const currentUser = await fetchCurrentUser();
+
     set((state) => ({
       ...state,
       cartItems: state.cartItems.map((item) =>
@@ -98,6 +136,22 @@ export const useCartStore = create<CartStore>((set, get) => ({
       ),
     }));
 
+    // Уменьшаем количество товара в БД
+
+    const newItems = await axios.patch(
+      `${import.meta.env.VITE_MOKKY_URL}/users/${currentUser.id}`,
+      {
+        cartItems: get().cartItems.map((item) =>
+          item.id === product.id ? { ...item, count: item.count - 1 } : item
+        ),
+      }
+    );
+
+    set((state) => ({
+      ...state,
+      cartItems: newItems.data.cartItems,
+    }));
+
     changeTotalPrice({ set, product, type: "decrease" });
 
     const totalPriceWithoutSale = get().cartItems.reduce((acc, item) => {
@@ -117,12 +171,30 @@ export const useCartStore = create<CartStore>((set, get) => ({
     }));
   },
 
-  increaseCount: (product) => {
+  increaseCount: async (product) => {
+    const currentUser = await fetchCurrentUser();
+
     set((state) => ({
       ...state,
       cartItems: state.cartItems.map((item) =>
         item.id === product.id ? { ...item, count: item.count + 1 } : item
       ),
+    }));
+
+    // Уменьшаем количество товара в БД
+
+    const newItems = await axios.patch(
+      `${import.meta.env.VITE_MOKKY_URL}/users/${currentUser.id}`,
+      {
+        cartItems: get().cartItems.map((item) =>
+          item.id === product.id ? { ...item, count: item.count - 1 } : item
+        ),
+      }
+    );
+
+    set((state) => ({
+      ...state,
+      cartItems: newItems.data.cartItems,
     }));
 
     changeTotalPrice({ set, product });

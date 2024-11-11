@@ -37,8 +37,6 @@ const SignUp = () => {
     } else toast.error("Что-то пошло не так");
   };
 
-  console.log(currentUser);
-
   return (
     <div className="flex items-center justify-center h-[calc(100vh-200px)] container">
       <div className="border rounded p-5 md:p-10 w-full sm:w-auto">

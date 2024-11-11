@@ -11,19 +11,41 @@ import {
 } from "../../ui/sheet";
 import CartItem from "./CartItem";
 import { Badge } from "../../ui/badge";
+import { CartItemType } from "../../../types";
+import { useEffect, useState } from "react";
 
 const Cart = ({ children }: { children: React.ReactNode }) => {
   const currentUser = useUserStore((state) => state.currentUser);
-
   const { cartItems, loading, error, totalPrice, totalPriceWithSale } =
     useCartStore();
+  const [cartItemsCurrent, setCartItemsCurrent] = useState<CartItemType[]>(
+    currentUser.cartItems || []
+  );
 
+  useEffect(() => {
+    if (currentUser.cartItems && currentUser.cartItems.length > 0) {
+      cartItemsCurrent.push(...currentUser.cartItems);
+      setCartItemsCurrent(currentUser.cartItems);
+    } else {
+      setCartItemsCurrent(cartItems);
+    }
+  }, [currentUser, cartItems]);
+
+  console.log({
+    currentUser: currentUser.cartItems,
+    cartItems,
+    cartItemsCurrent,
+  });
   return (
     <Sheet>
       <SheetTrigger className="relative">
         {children}
 
-        {cartItems.length > 0 && <Badge className="absolute -right-2 -top-2 w-[13px]  flex items-center justify-center text-xs">{cartItems.length}</Badge>}
+        {cartItems.length > 0 && (
+          <Badge className="absolute -right-2 -top-2 w-[13px]  flex items-center justify-center text-xs">
+            {cartItems.length}
+          </Badge>
+        )}
       </SheetTrigger>
       <SheetContent className="w-full sm:min-w-[640px] lg:min-w-[860px] lg:px-[104px] overflow-y-auto">
         {error && <p className="text-red">Произошла ошибка</p>}
@@ -62,7 +84,7 @@ const Cart = ({ children }: { children: React.ReactNode }) => {
                 быстрая доставка
               </SheetDescription>
               <div className="grid gap-8 mt-8 max-h-[550px] overflow-y-auto scrollbar pr-2">
-                {cartItems.map((item) => (
+                {cartItemsCurrent.map((item) => (
                   <CartItem key={item.id} product={item} />
                 ))}
               </div>

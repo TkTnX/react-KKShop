@@ -21,9 +21,8 @@ const SignIn = () => {
       password: "",
     },
   });
-console.log(currentUser)
   useEffect(() => {
-    if (currentUser.id || currentUser.token) {
+    if (currentUser.id ) {
       navigate("/profile");
     }
   }, [currentUser]);
