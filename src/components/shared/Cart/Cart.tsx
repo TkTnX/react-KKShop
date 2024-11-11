@@ -22,6 +22,8 @@ const Cart = ({ children }: { children: React.ReactNode }) => {
     currentUser.cartItems || []
   );
 
+  // TODO: ПОФИКСИТЬ БАГИ С ПЕРЕРИСОВКАМИ
+
   useEffect(() => {
     if (currentUser.cartItems && currentUser.cartItems.length > 0) {
       cartItemsCurrent.push(...currentUser.cartItems);
@@ -31,11 +33,7 @@ const Cart = ({ children }: { children: React.ReactNode }) => {
     }
   }, [currentUser, cartItems]);
 
-  console.log({
-    currentUser: currentUser.cartItems,
-    cartItems,
-    cartItemsCurrent,
-  });
+
   return (
     <Sheet>
       <SheetTrigger className="relative">

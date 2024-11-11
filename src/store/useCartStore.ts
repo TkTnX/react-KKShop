@@ -138,19 +138,14 @@ export const useCartStore = create<CartStore>((set, get) => ({
 
     // Уменьшаем количество товара в БД
 
-    const newItems = await axios.patch(
+    await axios.patch(
       `${import.meta.env.VITE_MOKKY_URL}/users/${currentUser.id}`,
       {
         cartItems: get().cartItems.map((item) =>
-          item.id === product.id ? { ...item, count: item.count - 1 } : item
+          item.id === product.id ? { ...item, count: item.count-- } : item
         ),
       }
     );
-
-    set((state) => ({
-      ...state,
-      cartItems: newItems.data.cartItems,
-    }));
 
     changeTotalPrice({ set, product, type: "decrease" });
 
@@ -177,25 +172,24 @@ export const useCartStore = create<CartStore>((set, get) => ({
     set((state) => ({
       ...state,
       cartItems: state.cartItems.map((item) =>
-        item.id === product.id ? { ...item, count: item.count + 1 } : item
+        item.id === product.id
+          ? { ...item, count: (item.count = item.count + 1) }
+          : item
       ),
     }));
 
     // Уменьшаем количество товара в БД
 
-    const newItems = await axios.patch(
+    await axios.patch(
       `${import.meta.env.VITE_MOKKY_URL}/users/${currentUser.id}`,
       {
         cartItems: get().cartItems.map((item) =>
-          item.id === product.id ? { ...item, count: item.count - 1 } : item
+          item.id === product.id
+            ? { ...item, count: (item.count = item.count + 1) }
+            : item
         ),
       }
     );
-
-    set((state) => ({
-      ...state,
-      cartItems: newItems.data.cartItems,
-    }));
 
     changeTotalPrice({ set, product });
 

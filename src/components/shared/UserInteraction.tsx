@@ -23,6 +23,7 @@ const UserInteraction = () => {
               src={
                 currentUser.avatarUrl ? currentUser.avatarUrl : "/profile.svg"
               }
+              className="object-contain max-w-[50px]"
               alt="profile"
             />
           </Link>

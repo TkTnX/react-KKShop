@@ -20,6 +20,9 @@ export type UserType = {
   email: string | null;
   password: string | null;
   avatarUrl: string | null;
+  birthdayDate?: string | null;
+  phoneNumber?: string | null;
+  city?: string | null;
   cartItems: CartItemType[] | null;
   id: number | null;
   token?: string;

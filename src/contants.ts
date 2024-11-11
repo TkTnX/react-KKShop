@@ -110,3 +110,18 @@ export const sortByValues = [
     value: "skindom",
   },
 ];
+
+export const profileMenuItems = [
+  {
+    name: "личная информация",
+    link: "/profile",
+  },
+  {
+    name: "избранное",
+    link: "/profile/favorites",
+  },
+  {
+    name: "мои покупки",
+    link: "/profile/purchases",
+  },
+];

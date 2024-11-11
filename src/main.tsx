@@ -6,11 +6,11 @@ import {
   Blog,
   Catalog,
   Certificates,
+  ChangeProfile,
   Club,
   Contacts,
   Delivery,
   Home,
-  Profile,
   SignIn,
   SignUp,
   SingleProduct,
@@ -18,6 +18,7 @@ import {
 import RootLayout from "./layout/RootLayout";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import ProfileLayout from "./layout/ProfileLayout";
 
 const router = createBrowserRouter([
   {
@@ -37,7 +38,13 @@ const router = createBrowserRouter([
       },
       {
         path: "/profile",
-        element: <Profile />,
+        element: <ProfileLayout />,
+        children: [
+          {
+            path: "/profile",
+            element: <ChangeProfile />,
+          },
+        ],
       },
 
       {

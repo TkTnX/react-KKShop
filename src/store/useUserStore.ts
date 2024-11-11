@@ -2,6 +2,7 @@ import axios from "axios";
 import { create } from "zustand";
 import { loginFormType, registerFormType } from "../lib/zod/registerSchema";
 import { UserType } from "../types";
+import { changeProfileType } from "../lib/zod/changeProfileSchema";
 
 interface UserStore {
   currentUser: UserType;
@@ -12,9 +13,10 @@ interface UserStore {
   handleLogin: (data: loginFormType) => void;
   handleAuthMe: (token: string) => void;
   handleLogout: () => void;
+  handleChangeProfile: (data: changeProfileType) => void;
 }
 
-export const useUserStore = create<UserStore>((set) => ({
+export const useUserStore = create<UserStore>((set, get) => ({
   currentUser: {
     name: null,
     email: null,
@@ -105,5 +107,38 @@ export const useUserStore = create<UserStore>((set) => ({
         id: null,
       },
     });
+  },
+
+  handleChangeProfile: async (data) => {
+    try {
+      set({ loading: true, error: false });
+
+      const currentUser = get().currentUser;
+      if (!currentUser.id) {
+        console.log("Error!");
+        set({ error: true });
+        return;
+      }
+
+      const updatedUser = await axios.patch(
+        `${import.meta.env.VITE_MOKKY_URL}/users/${currentUser.id}`,
+        {
+          name: data.name === "" ? currentUser.name : data.name,
+          email: data.email === "" ? currentUser.email : data.email,
+          password: data.password === "" ? currentUser.password : data.password,
+          avatarUrl:
+            data.avatarUrl === "" ? currentUser.avatarUrl : data.avatarUrl,
+        }
+      );
+
+      if (updatedUser.data.id) {
+        set({ currentUser: updatedUser.data });
+      }
+    } catch (error) {
+      console.log(error);
+      set({ error: true });
+    } finally {
+      set({ loading: false });
+    }
   },
 }));

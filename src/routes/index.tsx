@@ -8,7 +8,7 @@ import Blog from "./Blog.tsx";
 import SingleProduct from "./SingleProduct.tsx";
 import SignUp from "./SignUp.tsx";
 import SignIn from "./SignIn.tsx";
-import Profile from "./Profile.tsx";
+import ChangeProfile from "./ChangeProfile.tsx";
 export {
   Home,
   Catalog,
@@ -20,5 +20,5 @@ export {
   SingleProduct,
   SignUp,
   SignIn,
-  Profile,
+  ChangeProfile,
 };
