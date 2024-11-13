@@ -9,6 +9,7 @@ import SingleProduct from "./SingleProduct.tsx";
 import SignUp from "./SignUp.tsx";
 import SignIn from "./SignIn.tsx";
 import ChangeProfile from "./ChangeProfile.tsx";
+import Favorites from "./Favorites.tsx";
 export {
   Home,
   Catalog,
@@ -21,4 +22,5 @@ export {
   SignUp,
   SignIn,
   ChangeProfile,
+  Favorites,
 };

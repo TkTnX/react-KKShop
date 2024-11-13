@@ -120,8 +120,4 @@ export const profileMenuItems = [
     name: "избранное",
     link: "/profile/favorites",
   },
-  {
-    name: "мои покупки",
-    link: "/profile/purchases",
-  },
 ];

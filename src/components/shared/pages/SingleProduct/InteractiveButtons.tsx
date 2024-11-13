@@ -7,9 +7,11 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "../../../ui/tooltip";
+import { useState } from "react";
 
 const InteractiveButtons = ({ product }: { product: ProductType }) => {
   const addToCart = useCartStore((state) => state.addToCart);
+  const [isFav, setIsFav] = useState(false);
 
   const handleAddToCart = () => {
     addToCart(product);
@@ -31,8 +33,15 @@ const InteractiveButtons = ({ product }: { product: ProductType }) => {
           </TooltipContent>
         </Tooltip>
         <Tooltip>
-          <TooltipTrigger className="bg-[#1a1a1a] text-white p-4 h-14 hover:opacity-80 flex items-center justify-center">
-            <img src="/heart-white.svg" alt="Favorite" />
+          <TooltipTrigger
+            onClick={() => setIsFav(!isFav)}
+            className="bg-[#1a1a1a] text-white p-4 h-14 hover:opacity-80 flex items-center justify-center"
+          >
+            <img
+              className="w-6 h-6"
+              src={isFav ? "/heart-white-fill.svg" : "/heart-white.svg"}
+              alt="Favorite"
+            />
           </TooltipTrigger>
           <TooltipContent className="bg-black text-white py-3 px-3 block">
             Вы можете добавить продукт в избранное

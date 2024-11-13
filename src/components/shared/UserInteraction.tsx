@@ -11,10 +11,14 @@ const UserInteraction = () => {
           <img src="/search.svg" alt="Search" />
         </button>
       </li>
-      <li>
-        <button>
-          <img src="/heart.svg" alt="Favorite" />
-        </button>
+      <li className="h-[31px]">
+        <Link  to="/profile/favorites">
+          <img
+            
+            src="/heart.svg"
+            alt="Favorite"
+          />
+        </Link>
       </li>
       {currentUser.id ? (
         <li className="h-[31px]">

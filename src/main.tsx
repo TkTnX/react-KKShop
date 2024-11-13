@@ -10,6 +10,7 @@ import {
   Club,
   Contacts,
   Delivery,
+  Favorites,
   Home,
   SignIn,
   SignUp,
@@ -43,6 +44,10 @@ const router = createBrowserRouter([
           {
             path: "/profile",
             element: <ChangeProfile />,
+          },
+          {
+            path: "/profile/favorites",
+            element: <Favorites />,
           },
         ],
       },
