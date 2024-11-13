@@ -1,16 +1,25 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { cities } from "../../contants";
 import { Sheet, SheetContent, SheetDescription, SheetTitle } from "../ui/sheet";
 import { cn } from "../../lib/utils";
+import { useUserStore } from "../../store/useUserStore";
 
 const ChooseCity = () => {
   const [openCity, setOpenCity] = useState(false);
-  const [currentCity, setCurrentCity] = useState("Москва");
+  const { currentUser, handleChangeProfile } = useUserStore();
+  const [currentCity, setCurrentCity] = useState(currentUser.city || "");
 
-  const handleChooseCity = (city: string) => {
+  const handleChooseCity = async (city: string) => {
     setCurrentCity(city);
     setOpenCity(false);
+    await handleChangeProfile({ city });
   };
+
+  useEffect(() => {
+    if (currentUser.city) {
+      setCurrentCity(currentUser.city);
+    }
+  }, [currentCity, currentUser.city]);
 
   return (
     <>
@@ -32,24 +41,29 @@ const ChooseCity = () => {
             <span className="text-5xl lg:text-[80px] font-bold text-grey-light inline-block leading-[200%]">
               Найти город
             </span>
-            <p className="text-grey">
-              Вы можете выбрать <span className="text-black">более 3</span>{" "}
-              населённых пунктов по всей Российской Федерации.
-            </p>
-            <ul className="mt-6 grid gap-2">
-              {cities.map((city, index) => (
-                <li className="w-fit" onClick={() => handleChooseCity(city)} key={index}>
-                  <button
-                    className={cn("hover:text-pink", {
-                      "text-pink": city === currentCity,
-                    })}
-                  >
-                    {city}
-                  </button>
-                </li>
-              ))}
-            </ul>
           </SheetDescription>
+
+          <p className="text-grey">
+            Вы можете выбрать <span className="text-black">более 3</span>{" "}
+            населённых пунктов по всей Российской Федерации.
+          </p>
+          <ul className="mt-6 grid gap-2">
+            {cities.map((city, index) => (
+              <li
+                className="w-fit"
+                onClick={() => handleChooseCity(city)}
+                key={index}
+              >
+                <button
+                  className={cn("hover:text-pink", {
+                    "text-pink": city === currentCity,
+                  })}
+                >
+                  {city}
+                </button>
+              </li>
+            ))}
+          </ul>
         </SheetContent>
       </Sheet>
     </>

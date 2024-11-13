@@ -24,6 +24,9 @@ export const useUserStore = create<UserStore>((set, get) => ({
     avatarUrl: null,
     cartItems: null,
     id: null,
+    birthdayDate: null,
+    phoneNumber: null,
+    city: null,
   },
   loading: false,
   error: false,
@@ -37,6 +40,9 @@ export const useUserStore = create<UserStore>((set, get) => ({
           ...data,
           avatarUrl: "",
           cartItems: [],
+          birthdayDate: null,
+          phoneNumber: null,
+          city: null,
         }
       );
 
@@ -128,6 +134,15 @@ export const useUserStore = create<UserStore>((set, get) => ({
           password: data.password === "" ? currentUser.password : data.password,
           avatarUrl:
             data.avatarUrl === "" ? currentUser.avatarUrl : data.avatarUrl,
+          birthdayDate:
+            data.birthdayDate === ""
+              ? currentUser.birthdayDate
+              : data.birthdayDate,
+          phoneNumber:
+            data.phoneNumber === ""
+              ? currentUser.phoneNumber
+              : data.phoneNumber,
+          city: data.city === "" ? currentUser.city : data.city,
         }
       );
 

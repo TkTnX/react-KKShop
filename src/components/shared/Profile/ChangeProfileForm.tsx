@@ -5,13 +5,21 @@ import {
   changeProfileSchema,
   changeProfileType,
 } from "../../../lib/zod/changeProfileSchema";
+import { format } from "date-fns";
 import { useUserStore } from "../../../store/useUserStore";
 import { toast } from "react-toastify";
 import { UserType } from "../../../types";
 import { useState } from "react";
+import { Popover, PopoverContent, PopoverTrigger } from "../../ui/popover";
+import { CalendarIcon } from "lucide-react";
+import { cn } from "../../../lib/utils";
+import { Calendar } from "../../ui/calendar";
+import { Button } from "../../ui/button";
+import { cities } from "../../../contants";
 
 const ChangeProfileForm = ({ profileInfo }: { profileInfo: UserType }) => {
   const [checkboxActivated, setCheckboxActivated] = useState(false);
+  const [date, setDate] = useState<Date>();
   const handleChangeProfile = useUserStore(
     (state) => state.handleChangeProfile
   );
@@ -26,13 +34,20 @@ const ChangeProfileForm = ({ profileInfo }: { profileInfo: UserType }) => {
       email: "",
       password: "",
       avatarUrl: "",
+      birthdayDate: "",
+      phoneNumber: "",
+      city: "",
     },
   });
 
   const onSubmit = async (data: changeProfileType) => {
     try {
       if (checkboxActivated) {
-        await handleChangeProfile(data);
+        const dataWithBirthdayDate = {
+          ...data,
+          birthdayDate: date?.toLocaleDateString("ru-RU"),
+        };
+        await handleChangeProfile(dataWithBirthdayDate);
         toast.success("Профиль успешно обновлен!");
       } else {
         toast.error("Дайте согласие на обработку своих персональных данных");
@@ -43,6 +58,7 @@ const ChangeProfileForm = ({ profileInfo }: { profileInfo: UserType }) => {
     }
   };
 
+  console.log(profileInfo);
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
@@ -54,6 +70,28 @@ const ChangeProfileForm = ({ profileInfo }: { profileInfo: UserType }) => {
         placeholder={profileInfo.name || "Имя"}
       />
       {errors.name && <p className="text-red">{errors.name.message}</p>}
+      <Popover>
+        <PopoverTrigger asChild>
+          <Button
+            variant={"outline"}
+            className={cn(
+              "w-full justify-start text-left font-normal ",
+              !date && "text-muted-foreground"
+            )}
+          >
+            <CalendarIcon />
+            {date ? format(date, "PPP") : <span className="text-grey">Ваша дата рождения</span>}
+          </Button>
+        </PopoverTrigger>
+        <PopoverContent className="w-auto p-0">
+          <Calendar
+            mode="single"
+            selected={date}
+            onSelect={setDate}
+            initialFocus
+          />
+        </PopoverContent>
+      </Popover>
       <Input {...register("password")} type="password" placeholder="Пароль" />
       {errors.password && <p className="text-red">{errors.password.message}</p>}
 
@@ -66,15 +104,37 @@ const ChangeProfileForm = ({ profileInfo }: { profileInfo: UserType }) => {
         <p className="text-red">{errors.avatarUrl.message}</p>
       )}
 
-      <Input type="text" placeholder="Дата рождения" />
       <Input
         {...register("email")}
         type="email"
         placeholder={profileInfo.email || "Ваша почта"}
       />
       {errors.email && <p className="text-red">{errors.email.message}</p>}
-      <Input type="tel" placeholder="Ваш номер телефона" />
-      <Input type="text" placeholder="Ваш город" />
+      <Input
+        {...register("phoneNumber")}
+        type="tel"
+        placeholder="Ваш номер телефона"
+      />
+      {errors.phoneNumber && (
+        <p className="text-red">{errors.phoneNumber.message}</p>
+      )}
+
+      <select
+        {...register("city")}
+        className="border p-2 rounded text-grey text-sm"
+        defaultValue={profileInfo.city || ""}
+      >
+        <option value={""} hidden selected>
+          Ваш город
+        </option>
+        {cities.map((city) => (
+          <option value={city} key={city}>
+            {city}
+          </option>
+        ))}
+      </select>
+      {errors.city && <p className="text-red">{errors.city.message}</p>}
+
       <div className="flex items-center gap-4 max-w-[400px]">
         <input
           onChange={() => setCheckboxActivated(!checkboxActivated)}
