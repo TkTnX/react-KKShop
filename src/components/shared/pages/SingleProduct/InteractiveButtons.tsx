@@ -7,15 +7,31 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "../../../ui/tooltip";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useFavoritesStore } from "../../../../store/useFavorites";
 
 const InteractiveButtons = ({ product }: { product: ProductType }) => {
   const addToCart = useCartStore((state) => state.addToCart);
+  const switchFavorites = useFavoritesStore((state) => state.switchFavorites);
+  const { fetchFavorites, favorites } = useFavoritesStore();
   const [isFav, setIsFav] = useState(false);
+
+  useEffect(() => {
+    setIsFav(favorites.some((item) => item.id === product.id));
+    fetchFavorites();
+  }, []);
 
   const handleAddToCart = () => {
     addToCart(product);
     toast.success("Товар добавлен в корзину!", { delay: 500 });
+  };
+
+  const handleSwitchFavorite = () => {
+    switchFavorites(product);
+    setIsFav(!isFav);
+    toast.success(`Товар ${isFav ? "удален из" : "добавлен в"} избранное`, {
+      delay: 500,
+    });
   };
 
   return (
@@ -34,7 +50,7 @@ const InteractiveButtons = ({ product }: { product: ProductType }) => {
         </Tooltip>
         <Tooltip>
           <TooltipTrigger
-            onClick={() => setIsFav(!isFav)}
+            onClick={handleSwitchFavorite}
             className="bg-[#1a1a1a] text-white p-4 h-14 hover:opacity-80 flex items-center justify-center"
           >
             <img

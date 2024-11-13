@@ -58,7 +58,6 @@ const ChangeProfileForm = ({ profileInfo }: { profileInfo: UserType }) => {
     }
   };
 
-  console.log(profileInfo);
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
@@ -145,9 +144,9 @@ const ChangeProfileForm = ({ profileInfo }: { profileInfo: UserType }) => {
           <a className="text-pink" href="#!">
             Политикой в отношении обработки персональных данных
           </a>
-          и{" "}
+          {" "}и{" "}
           <a className="text-pink" href="#!">
-            Пользовательским соглашением.
+             Пользовательским соглашением.
           </a>
         </p>
       </div>

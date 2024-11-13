@@ -1,28 +1,26 @@
+import { useEffect } from "react";
 import FavoritesList from "../components/shared/pages/Favorites/FavoritesList";
-import { ProductType } from "../types";
+import { useUserStore } from "../store/useUserStore";
+import { useNavigate } from "react-router-dom";
+import { useFavoritesStore } from "../store/useFavorites";
 
 const Favorites = () => {
-  const favoritesList: ProductType[] = [
-    {
-      id: 1,
-      img: "/products/01.png",
-      title: "Комплекс для выпрямления волос c экстрактом хны",
-      desc: "R&B Henna Spa Therapy Magic Straight Cream",
-      isSale: true,
-      priceWithSale: 1300,
-      price: 2300,
-      size: 50,
-      country: "Россия",
-      typeOfCare: "Женский",
-      hairType: "Короткие волосы",
-      brand: "R&B",
-    },
-  ];
+  const currentUser = useUserStore((state) => state.currentUser);
+  const { favorites, fetchFavorites } = useFavoritesStore();
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (!currentUser) {
+      navigate("/sign-in");
+    }
+    fetchFavorites();
+  }, [currentUser]);
   return (
     <>
-      <h2 className="text-5xl md:text-8xl 5xl:text-9xl font-bold ">Мой лист пожеланий</h2>
-      {favoritesList.length > 0 ? (
-        <FavoritesList favoritesList={favoritesList} />
+      <h2 className="text-5xl md:text-8xl 5xl:text-9xl font-bold ">
+        Мой лист пожеланий
+      </h2>
+      {favorites && favorites.length > 0 ? (
+        <FavoritesList favoritesList={favorites} />
       ) : (
         <p className="text-2xl mt-10">В листе пожеланий пусто.</p>
       )}

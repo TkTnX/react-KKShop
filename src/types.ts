@@ -26,4 +26,5 @@ export type UserType = {
   cartItems: CartItemType[] | null;
   id: number | null;
   token?: string;
+  favoritesItems: ProductType[] | null;
 };
