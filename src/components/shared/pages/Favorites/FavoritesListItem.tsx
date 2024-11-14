@@ -1,20 +1,32 @@
 import { toast } from "react-toastify";
 import { useFavoritesStore } from "../../../../store/useFavorites";
 import { ProductType } from "../../../../types";
+import { useCartStore } from "../../../../store/useCartStore";
+
 
 const FavoritesListItem = ({ product }: { product: ProductType }) => {
-  // TODO: Отсюда возможность добавлять в корзину
   const { switchFavorites, error } = useFavoritesStore();
+  const {addToCart, error: cartError} = useCartStore() 
   const handleRemoveFromFavorites = async () => {
     await switchFavorites(product);
 
     if (error) {
       console.log(error);
-      toast.error("Что-то пошло не так");
+      toast.error("Что-то пошло не так",{delay: 500});
     } else {
-      toast.success("Товар удален из избранного");
+      toast.success("Товар удален из избранного",{delay: 500});
     }
   };
+
+  const handleAddToCart = () => {
+    addToCart(product);
+    if (cartError) {
+      console.log(cartError);
+      toast.error("Что-то пошло не так");
+    } else {
+      toast.success("Товар добавлен в корзину!");
+    }
+  }
 
   return (
     <div className=" sm:min-w-[532px] w-fit">
@@ -33,7 +45,7 @@ const FavoritesListItem = ({ product }: { product: ProductType }) => {
               <button onClick={handleRemoveFromFavorites}>
                 <img src="/heart-black-fill.svg" alt="Heart" />
               </button>
-              <button>
+              <button onClick={handleAddToCart}>
                 <img src="/cart.svg" alt="Cart" />
               </button>
             </div>

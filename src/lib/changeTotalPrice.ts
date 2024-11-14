@@ -1,29 +1,20 @@
-import { ProductType } from "../types";
+import { CartItemType } from "../types";
 
 export const changeTotalPrice = ({
   set,
-  product,
-  type = "increase",
+  cartItems,
 }: {
   set: any;
-  product: ProductType;
+  cartItems: CartItemType[];
   type?: "decrease" | "increase";
 }) => {
-  if (type === "decrease") {
-    set((state: any) => ({
-      ...state,
-      totalPrice:
-        product.isSale && product.priceWithSale
-          ? state.totalPrice - product.priceWithSale
-          : state.totalPrice - product.price,
-    }));
-  } else {
-    set((state: any) => ({
-      ...state,
-      totalPrice:
-        product.isSale && product.priceWithSale
-          ? state.totalPrice + product.priceWithSale
-          : state.totalPrice + product.price,
-    }));
-  }
+  set({
+    totalPrice: cartItems.reduce((acc: number, item: CartItemType) => {
+      if (item.isSale && item.priceWithSale) {
+        return (acc + item.priceWithSale) * item.count;
+      } else {
+        return (acc + item.price) * item.count;
+      }
+    }, 0),
+  });
 };

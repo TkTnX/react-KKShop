@@ -11,28 +11,17 @@ import {
 } from "../../ui/sheet";
 import CartItem from "./CartItem";
 import { Badge } from "../../ui/badge";
-import { CartItemType } from "../../../types";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 const Cart = ({ children }: { children: React.ReactNode }) => {
   const currentUser = useUserStore((state) => state.currentUser);
-  const { cartItems, loading, error, totalPrice, totalPriceWithSale } =
-    useCartStore();
-  const [cartItemsCurrent, setCartItemsCurrent] = useState<CartItemType[]>(
-    currentUser.cartItems || []
-  );
-
-  // TODO: ПОФИКСИТЬ БАГИ С ПЕРЕРИСОВКАМИ
+  const { cartItems, loading, error, totalPrice, fetchCart } = useCartStore();
 
   useEffect(() => {
-    if (currentUser.cartItems && currentUser.cartItems.length > 0) {
-      cartItemsCurrent.push(...currentUser.cartItems);
-      setCartItemsCurrent(currentUser.cartItems);
-    } else {
-      setCartItemsCurrent(cartItems);
-    }
-  }, [currentUser, cartItems]);
+    fetchCart();
+  }, [currentUser]);
 
+  console.log(loading);
 
   return (
     <Sheet>
@@ -82,21 +71,13 @@ const Cart = ({ children }: { children: React.ReactNode }) => {
                 быстрая доставка
               </SheetDescription>
               <div className="grid gap-8 mt-8 max-h-[550px] overflow-y-auto scrollbar pr-2">
-                {cartItemsCurrent.map((item) => (
-                  <CartItem key={item.id} product={item} />
+                {cartItems.map((item) => (
+                  <CartItem key={item.id} product={item} loading={loading} />
                 ))}
               </div>
               {/* CONTROLS */}
               <div className="mt-4">
                 <div className="flex items-center gap-9 justify-self-end">
-                  {totalPriceWithSale > 0 && (
-                    <p className="text-lg flex flex-col gap-2 text-[#915167]">
-                      <span className="text-xs text-[#545454] text-right">
-                        Скидка
-                      </span>
-                      -{totalPriceWithSale} руб
-                    </p>
-                  )}
                   <p className="text-lg flex flex-col gap-2">
                     <span className="text-xs text-[#545454] text-right">
                       К оплате
@@ -104,7 +85,7 @@ const Cart = ({ children }: { children: React.ReactNode }) => {
                     {totalPrice} руб
                   </p>
                 </div>
-                <button className="text-center py-4 bg-black w-full text-white mt-2 hover:opacity-80">
+                <button disabled={loading} className="text-center py-4 bg-black w-full text-white mt-2 hover:opacity-80 disabled:opacity-50 disabled:pointer-events-none">
                   Оформить заказ
                 </button>
               </div>
