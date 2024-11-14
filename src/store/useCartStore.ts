@@ -63,6 +63,22 @@ export const useCartStore = create<CartStore>((set, get) => ({
             item.id === product.id ? { ...item, count: item.count + 1 } : item
           ),
         }));
+
+        // Изменяем количество товара
+        const newItems = await axios.patch(
+          `${import.meta.env.VITE_MOKKY_URL}/users/${currentUser.id}`,
+          {
+            cartItems: get().cartItems.map((item) =>
+              item.id === product.id ? { ...item, count: item.count++ } : item
+            ),
+          }
+        );
+        set((state) => ({
+          ...state,
+          cartItems: newItems.data.cartItems,
+        }));
+        changeTotalPrice({ set, cartItems: newItems.data.cartItems });
+
         //   если нет - добавляем
       } else {
         set((state) => ({

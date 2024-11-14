@@ -19,9 +19,7 @@ const Cart = ({ children }: { children: React.ReactNode }) => {
 
   useEffect(() => {
     fetchCart();
-  }, [currentUser]);
-
-  console.log(loading);
+  }, []);
 
   return (
     <Sheet>
@@ -36,7 +34,7 @@ const Cart = ({ children }: { children: React.ReactNode }) => {
       </SheetTrigger>
       <SheetContent className="w-full sm:min-w-[640px] lg:min-w-[860px] lg:px-[104px] overflow-y-auto">
         {error && <p className="text-red">Произошла ошибка</p>}
-        {loading && <p className="text-pink">Загрузка...</p>}
+        {loading && !error && <p className="text-pink">Загрузка...</p>}
         {!currentUser.id || cartItems.length === 0 ? (
           <div className="h-full flex items-center justify-center">
             <div className="text-center">
@@ -85,7 +83,10 @@ const Cart = ({ children }: { children: React.ReactNode }) => {
                     {totalPrice} руб
                   </p>
                 </div>
-                <button disabled={loading} className="text-center py-4 bg-black w-full text-white mt-2 hover:opacity-80 disabled:opacity-50 disabled:pointer-events-none">
+                <button
+                  disabled={loading}
+                  className="text-center py-4 bg-black w-full text-white mt-2 hover:opacity-80 disabled:opacity-50 disabled:pointer-events-none"
+                >
                   Оформить заказ
                 </button>
               </div>

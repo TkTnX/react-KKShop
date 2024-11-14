@@ -11,7 +11,7 @@ import { useEffect, useState } from "react";
 import { useFavoritesStore } from "../../../../store/useFavorites";
 
 const InteractiveButtons = ({ product }: { product: ProductType }) => {
-  const addToCart = useCartStore((state) => state.addToCart);
+  const {addToCart, loading} = useCartStore();
   const switchFavorites = useFavoritesStore((state) => state.switchFavorites);
   const { fetchFavorites, favorites } = useFavoritesStore();
   const [isFav, setIsFav] = useState(false);
@@ -20,6 +20,8 @@ const InteractiveButtons = ({ product }: { product: ProductType }) => {
     setIsFav(favorites.some((item) => item.id === product.id));
     fetchFavorites();
   }, []);
+
+  console.log(loading)
 
   const handleAddToCart = () => {
     addToCart(product);
