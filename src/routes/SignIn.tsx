@@ -49,6 +49,7 @@ const SignIn = () => {
           <Input
             {...register("password")}
             type="password"
+            autoComplete="off"
             placeholder="Пароль"
           />
           {<p className="text-red">{errors.password?.message}</p>}

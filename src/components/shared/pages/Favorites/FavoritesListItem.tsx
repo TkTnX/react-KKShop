@@ -18,6 +18,7 @@ const FavoritesListItem = ({ product }: { product: ProductType }) => {
     }
   };
 
+
   const handleAddToCart = () => {
     addToCart(product);
     if (cartError) {

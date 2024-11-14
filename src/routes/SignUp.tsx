@@ -64,6 +64,7 @@ const SignUp = () => {
           <Input
             {...register("password", { required: true, minLength: 6 })}
             type="password"
+            autoComplete="off"
             placeholder="Пароль"
           />
           {<p className="text-red">{errors.password?.message}</p>}

@@ -21,6 +21,9 @@ export const useFavoritesStore = create<FavoritesStore>((set, get) => ({
     try {
       set({ loading: true });
       const currentUser = await fetchCurrentUser();
+      if (!currentUser.id) {
+        throw new Error("User not found");
+      }
       set({ favorites: currentUser.favoritesItems });
     } catch (error) {
       console.log(error);

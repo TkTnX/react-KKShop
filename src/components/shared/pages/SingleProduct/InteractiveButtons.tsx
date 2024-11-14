@@ -9,8 +9,12 @@ import {
 } from "../../../ui/tooltip";
 import { useEffect, useState } from "react";
 import { useFavoritesStore } from "../../../../store/useFavorites";
+import { cn } from "../../../../lib/utils";
+import { useUserStore } from "../../../../store/useUserStore";
+import { Link } from "react-router-dom";
 
 const InteractiveButtons = ({ product }: { product: ProductType }) => {
+  const currentUser = useUserStore((state) => state.currentUser);
   const {addToCart, loading} = useCartStore();
   const switchFavorites = useFavoritesStore((state) => state.switchFavorites);
   const { fetchFavorites, favorites } = useFavoritesStore();
@@ -21,7 +25,7 @@ const InteractiveButtons = ({ product }: { product: ProductType }) => {
     fetchFavorites();
   }, []);
 
-  console.log(loading)
+
 
   const handleAddToCart = () => {
     addToCart(product);
@@ -36,8 +40,20 @@ const InteractiveButtons = ({ product }: { product: ProductType }) => {
     });
   };
 
+  if(!currentUser.id) return (
+    <Link to="/sign-in" className="bg-black text-white py-3 px-3 block text-center hover:opacity-80 text-xs mt-2">
+      Войдите в аккаунт, чтобы добавить товар в корзину
+    </Link>
+  );
+
   return (
-    <div className="flex sm:grid grid-cols-2 xl:flex items-center gap-2 md:gap-5 mt-5">
+    <div
+      className={cn(
+        "flex sm:grid grid-cols-2 xl:flex items-center gap-2 md:gap-5 mt-5",
+        {
+          "pointer-events-none opacity-50": loading,}
+      )}
+    >
       <TooltipProvider>
         <Tooltip>
           <TooltipTrigger

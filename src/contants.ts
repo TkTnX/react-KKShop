@@ -121,3 +121,41 @@ export const profileMenuItems = [
     link: "/profile/favorites",
   },
 ];
+
+export const ourShops = [
+  {
+    type: "Магазин",
+    address: "Москва, метро Шаболовская, Улица Шаболовка, д. 34, стр. 7",
+    web: "Kkshop.ru",
+    email: "Sale@kkshop.ru",
+    phone: "+7 495 259 25 00",
+  },
+  {
+    type: "Магазин",
+    address: "Россия, Нижний Новгород, Ул Генерала Лизюкова, 17А",
+    web: "NizhniyNovgorod.kkshop.ru",
+    email: "NizhniyNovgorod@kkshop.ru",
+    phone: "+7 495 259 25 00",
+  },
+  {
+    type: "Пункт выдачи",
+    address: "Россия, Казань, Ул 8-й Воздушной Армии, 28А",
+    web: "Kazan.kkshop.ru",
+    email: "Kazan@kkshop.ru",
+    phone: "+7 495 259 25 00",
+  },
+  {
+    type: "Пункт выдачи",
+    address: "Россия, Респ Башкортостан, Уфа, Дагестанская ул, 12",
+    web: "spb.kkshop.ru",
+    email: "spb@kkshop.ru",
+    phone: "+7 495 259 25 00",
+  },
+  {
+    type: "Магазин",
+    address: "Россия, Екатеринбург, ул. 8 марта, 12",
+    web: "ekb.kkshop.ru",
+    email: "ekb@kkshop.ru",
+    phone: "+7 495 259 25 00",
+  },
+];

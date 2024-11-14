@@ -33,7 +33,7 @@ const Club = () => {
         </h2>
         <div className="mt-3 sm:mt-10">
           <h6 className="text-lg sm:text-xl font-medium">
-            Как вступить вклубкосметологов?
+            Как вступить в клуб косметологов?
           </h6>
           <p className="mt-5">
             Вступить в клуб косметологов могут только специалисты индустрии

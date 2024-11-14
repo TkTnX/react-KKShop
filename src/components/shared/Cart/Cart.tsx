@@ -33,7 +33,7 @@ const Cart = ({ children }: { children: React.ReactNode }) => {
         )}
       </SheetTrigger>
       <SheetContent className="w-full sm:min-w-[640px] lg:min-w-[860px] lg:px-[104px] overflow-y-auto">
-        {error && <p className="text-red">Произошла ошибка</p>}
+        {error && currentUser.id && <p className="text-red">Произошла ошибка</p>}
         {loading && !error && <p className="text-pink">Загрузка...</p>}
         {!currentUser.id || cartItems.length === 0 ? (
           <div className="h-full flex items-center justify-center">

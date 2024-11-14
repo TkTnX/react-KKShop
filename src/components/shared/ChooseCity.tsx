@@ -7,7 +7,7 @@ import { useUserStore } from "../../store/useUserStore";
 const ChooseCity = () => {
   const [openCity, setOpenCity] = useState(false);
   const { currentUser, handleChangeProfile } = useUserStore();
-  const [currentCity, setCurrentCity] = useState(currentUser.city || "");
+  const [currentCity, setCurrentCity] = useState(currentUser.city || "Москва");
 
   const handleChooseCity = async (city: string) => {
     setCurrentCity(city);

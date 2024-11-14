@@ -91,7 +91,7 @@ const ChangeProfileForm = ({ profileInfo }: { profileInfo: UserType }) => {
           />
         </PopoverContent>
       </Popover>
-      <Input {...register("password")} type="password" placeholder="Пароль" />
+      <Input {...register("password")} type="password" placeholder="Пароль" autoComplete="off" />
       {errors.password && <p className="text-red">{errors.password.message}</p>}
 
       <Input
@@ -123,7 +123,7 @@ const ChangeProfileForm = ({ profileInfo }: { profileInfo: UserType }) => {
         className="border p-2 rounded text-grey text-sm"
         defaultValue={profileInfo.city || ""}
       >
-        <option value={""} hidden selected>
+        <option value={""} hidden >
           Ваш город
         </option>
         {cities.map((city) => (
