@@ -14,10 +14,7 @@ export const navbar = [
     name: "Клуб косметологов",
     link: "/club",
   },
-  {
-    name: "Сертификаты",
-    link: "/certificates",
-  },
+
   {
     name: "Доставка и Оплата",
     link: "/delivery",

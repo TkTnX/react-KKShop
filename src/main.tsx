@@ -5,7 +5,6 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import {
   Blog,
   Catalog,
-  Certificates,
   ChangeProfile,
   Club,
   Contacts,
@@ -20,6 +19,7 @@ import RootLayout from "./layout/RootLayout";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ProfileLayout from "./layout/ProfileLayout";
+import SinglePost from "./routes/SinglePost";
 
 const router = createBrowserRouter([
   {
@@ -64,10 +64,7 @@ const router = createBrowserRouter([
         path: "/club",
         element: <Club />,
       },
-      {
-        path: "/certificates",
-        element: <Certificates />,
-      },
+
       {
         path: "/delivery",
         element: <Delivery />,
@@ -79,6 +76,10 @@ const router = createBrowserRouter([
       {
         path: "/blog",
         element: <Blog />,
+      },
+      {
+        path: "/blog/:id",
+        element: <SinglePost />,
       },
     ],
   },

@@ -57,6 +57,9 @@ const Catalog = () => {
             Skindom
           </option>
         </select>
+        <button className="border-b border-b-black text-pink outline-none">
+          Цена
+        </button>
       </div>
 
       {/* CATALOG ITEMS */}

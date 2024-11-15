@@ -28,3 +28,11 @@ export type UserType = {
   token?: string;
   favoritesItems: ProductType[] | null;
 };
+
+export type PostType = {
+  id: number;
+  img: string;
+  title: string;
+  desc: string;
+  createdAt: string;
+};

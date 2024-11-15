@@ -64,6 +64,13 @@ select {
   max-width: 50%;
 }
 
+.description-lg {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
 @layer base {
   :root {
     --radius: 0.5rem;
