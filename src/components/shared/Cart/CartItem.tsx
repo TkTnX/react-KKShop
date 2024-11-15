@@ -2,7 +2,15 @@ import { cn } from "../../../lib/utils";
 import { useCartStore } from "../../../store/useCartStore";
 import { CartItemType } from "../../../types";
 
-const CartItem = ({ product, loading }: { product: CartItemType; loading: boolean }) => {
+const CartItem = ({
+  product,
+  loading,
+  isCart = true,
+}: {
+  product: CartItemType;
+  loading?: boolean;
+  isCart?: boolean;
+}) => {
   const { removeFromCart, increaseCount, decreaseCount } = useCartStore();
   return (
     <div
@@ -24,7 +32,11 @@ const CartItem = ({ product, loading }: { product: CartItemType; loading: boolea
         <p className="text-sm text-[#434343]">{product.size} мл</p>
       </div>
       {/* CONTROLS TOP */}
-      <div className="flex items-center gap-3 absolute top-0 right-0">
+      <div
+        className={cn("flex items-center gap-3 absolute top-0 right-0", {
+          hidden: !isCart,
+        })}
+      >
         <button
           disabled={product.count === 1}
           onClick={() => decreaseCount(product)}

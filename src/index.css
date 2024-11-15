@@ -57,7 +57,7 @@ select {
 }
 
 .description {
-    display: -webkit-box;
+  display: -webkit-box;
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
   overflow: hidden;
@@ -72,21 +72,29 @@ select {
 
 /* width */
 .scrollbar::-webkit-scrollbar {
-    width: 10px;
+  width: 10px;
 }
 
 /* Track */
 .scrollbar::-webkit-scrollbar-track {
-    background: #f1f1f1;
+  background: #f1f1f1;
 }
 
 /* Handle */
 .scrollbar::-webkit-scrollbar-thumb {
-    background: #888;
-    border-radius: 5px;
+  background: #888;
+  border-radius: 5px;
 }
 
 /* Handle on hover */
 .scrollbar::-webkit-scrollbar-thumb:hover {
-    background: #555;
+  background: #555;
+}
+
+ol {
+  list-style: decimal;
+}
+
+ol li::marker {
+  font-weight: bold;
 }
