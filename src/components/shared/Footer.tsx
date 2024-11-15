@@ -77,11 +77,11 @@ const Footer = () => {
       {/* BOTTOM */}
       <div className="text-grey flex lg:items-center justify-between mt-14 sm:text-sm flex-col items-start gap-2 lg:gap-0 lg:flex-row text-xs">
         <div>
-          <p>ООО «Шармира»</p>
+          <p>ООО «TIMUR DEV»</p>
           <p>
-            ОГРН <span className="text-black">1167746492704</span>
+            ОГРН <span className="text-black">66666666</span>
           </p>
-          <p>KK Shop © Москва 2024 Все права защищены.</p>
+          <p>KK Shop © Москва 2024 Все права НЕ защищены.</p>
         </div>
         <p className="max-w-[700px] ">
           Все торговые марки принадлежат их владельцам. Копирование составляющих

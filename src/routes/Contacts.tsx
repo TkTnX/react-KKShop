@@ -18,7 +18,7 @@ const Contacts = () => {
                 className="text-pink hover:underline max-w-fit"
                 href={shop.web}
               >
-                {shop.web}
+                {shop.web.split("https://")[1]}
               </a>
               <a
                 className="text-pink hover:underline max-w-fit"
