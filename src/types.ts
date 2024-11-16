@@ -36,3 +36,10 @@ export type PostType = {
   desc: string;
   createdAt: string;
 };
+
+export type SortByType = {
+  sortBy: string;
+  brand: string | null;
+  priceFrom: number | null;
+  priceTo: number | null;
+};

@@ -2,22 +2,31 @@ import { useEffect } from "react";
 import { useProductsStore } from "../../../../store/useProducts";
 import Product from "../../../shared/Product";
 import { useChangeParams } from "../../../../hooks/useChangeParams";
+import { SortByType } from "../../../../types";
 
 const CatalogItems = ({
   sortBy,
+  setSortBy,
 }: {
-  sortBy: {
-    sortBy: string;
-    brand: string | null;
-  };
+  sortBy: SortByType;
+  setSortBy: (value: SortByType) => void;
 }) => {
   const { products, fetchProducts, error, loading } = useProductsStore();
 
   useEffect(() => {
-    const sortURL = useChangeParams({ sortBy });
-
+    const sortURL = useChangeParams(sortBy);
     fetchProducts(sortURL);
   }, [sortBy]);
+
+  useEffect(() => {
+    fetchProducts();
+    const prices = products.map((p) => p.price);
+    setSortBy({
+      ...sortBy,
+      priceFrom: Math.min(...prices),
+      priceTo: Math.max(...prices),
+    });
+  }, [products && products.length > 0]);
 
   error && !loading && (
     <p className="text-pink text-center text-lg">

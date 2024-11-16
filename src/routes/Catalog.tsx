@@ -1,15 +1,19 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import CatalogItems from "../components/shared/pages/Catalog/CatalogItems";
+import PriceDropdown from "../components/shared/pages/Catalog/PriceDropdown";
+import { SortByType } from "../types";
+
+
 
 const Catalog = () => {
-  const [sortBy, setSortBy] = useState<{
-    sortBy: string;
-    brand: string | null;
-  }>({
+  const [sortBy, setSortBy] = useState<SortByType>({
     sortBy: "price",
     brand: null,
+    priceFrom: 0,
+    priceTo: null,
   });
+
 
   return (
     <div className="container">
@@ -57,14 +61,16 @@ const Catalog = () => {
             Skindom
           </option>
         </select>
-        <button className="border-b border-b-black text-pink outline-none">
-          Цена
-        </button>
+        <PriceDropdown setSortBy={setSortBy} sortBy={sortBy}>
+          <button className="border-b border-b-black text-pink outline-none">
+            Цена
+          </button>
+        </PriceDropdown>
       </div>
 
       {/* CATALOG ITEMS */}
 
-      <CatalogItems sortBy={sortBy} />
+      <CatalogItems setSortBy={setSortBy} sortBy={sortBy} />
     </div>
   );
 };
