@@ -11,9 +11,11 @@ import {
 } from "../../ui/sheet";
 import CartItem from "./CartItem";
 import { Badge } from "../../ui/badge";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import Order from "../Order/Order";
 
 const Cart = ({ children }: { children: React.ReactNode }) => {
+  const [open, setOpen] = useState(false)
   const currentUser = useUserStore((state) => state.currentUser);
   const { cartItems, loading, error, totalPrice, fetchCart } = useCartStore();
 
@@ -22,7 +24,7 @@ const Cart = ({ children }: { children: React.ReactNode }) => {
   }, []);
 
   return (
-    <Sheet>
+    <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger className="relative">
         {children}
 
@@ -33,7 +35,9 @@ const Cart = ({ children }: { children: React.ReactNode }) => {
         )}
       </SheetTrigger>
       <SheetContent className="w-full sm:min-w-[640px] lg:min-w-[860px] lg:px-[104px] overflow-y-auto">
-        {error && currentUser.id && <p className="text-red">Произошла ошибка</p>}
+        {error && currentUser.id && (
+          <p className="text-red">Произошла ошибка</p>
+        )}
         {loading && !error && <p className="text-pink">Загрузка...</p>}
         {!currentUser.id || cartItems.length === 0 ? (
           <div className="h-full flex items-center justify-center">
@@ -83,12 +87,14 @@ const Cart = ({ children }: { children: React.ReactNode }) => {
                     {totalPrice} руб
                   </p>
                 </div>
-                <button
-                  disabled={loading}
-                  className="text-center py-4 bg-black w-full text-white mt-2 hover:opacity-80 disabled:opacity-50 disabled:pointer-events-none"
-                >
-                  Оформить заказ
-                </button>
+                <Order setCloseCartModal={setOpen} loading={loading}>
+                  <button
+                    disabled={loading}
+                    className="text-center py-4 bg-black w-full text-white mt-2 hover:opacity-80 disabled:opacity-50 disabled:pointer-events-none"
+                  >
+                    Оформить заказ
+                  </button>
+                </Order>
               </div>
             </div>
           </SheetHeader>
