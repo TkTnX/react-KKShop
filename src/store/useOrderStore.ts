@@ -1,31 +1,42 @@
 import { create } from "zustand";
+import { OrderInfoType, OrderType, ProductType } from "../types";
+import axios from "axios";
+import { fetchCurrentUser } from "../lib/fetchCurrentUser";
 
 interface OrderStore {
-  orderInfo: {
-    city: string | null;
-    deliveryType: "Курьер" | "Самовывоз";
-    address: string | null;
-    time: string | null;
-    paymentType: "Card" | "Gpay" | "Cash";
-  };
+  orderInfo: OrderInfoType;
+  loading: boolean;
+  error: boolean;
 
+  changeCity: (city: string) => void;
   changeDeliveryType: (deliveryType: "delivery" | "pickup") => void;
   changeAddress: (address: string) => void;
   changeDate: (date: string) => void;
   changePaymentType: (payType: "Card" | "Gpay" | "Cash") => void;
+  createOrder: (
+    data: OrderInfoType,
+    products: ProductType[]
+  ) => Promise<number>;
+  fetchOneOrder: (id: string) => Promise<OrderType>;
 }
 
 export const useOrderStore = create<OrderStore>((set, get) => ({
+  loading: false,
+  error: false,
   orderInfo: {
     city: null,
     deliveryType: "Курьер",
     address: null,
-    time: null,
-    paymentType: "Cash"
+    time: "Пн 10:00 - 20:00",
+    paymentType: "Cash",
   },
 
+  changeCity(city) {
+    set({ orderInfo: { ...get().orderInfo, city } });
+  },
   changeDeliveryType(deliveryType) {
-    const deliveryTypeName = deliveryType === "delivery" ? "Курьер" : "Самовывоз";
+    const deliveryTypeName =
+      deliveryType === "delivery" ? "Курьер" : "Самовывоз";
     set({ orderInfo: { ...get().orderInfo, deliveryType: deliveryTypeName } });
   },
   changeAddress(address) {
@@ -37,5 +48,42 @@ export const useOrderStore = create<OrderStore>((set, get) => ({
   },
   changePaymentType(payType) {
     set({ orderInfo: { ...get().orderInfo, paymentType: payType } });
+  },
+
+  createOrder: async (data, products) => {
+    const currentUser = await fetchCurrentUser();
+    if (!currentUser) return null;
+    try {
+      const newOrder = await axios.post(
+        `${import.meta.env.VITE_MOKKY_URL}/orders`,
+        {
+          ...data,
+          userId: currentUser.id,
+          products,
+        }
+      );
+
+      if (!newOrder.data) throw new Error("Order not created");
+
+      return newOrder.data.id;
+    } catch (error) {
+      console.log(error);
+    }
+  },
+
+  fetchOneOrder: async (id) => {
+    try {
+      set({ loading: true });
+      const order = await axios.get(
+        `${import.meta.env.VITE_MOKKY_URL}/orders/${id}`
+      );
+
+      return order.data;
+    } catch (error) {
+      console.log(error);
+      set({ error: true });
+    } finally {
+      set({ loading: false });
+    }
   },
 }));

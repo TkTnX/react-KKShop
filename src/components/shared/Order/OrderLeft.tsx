@@ -9,9 +9,14 @@ import ChangeAddress from "./OrderSteps/ChangeAddress";
 import ChangeDate from "./OrderSteps/ChangeDate";
 import ChangeUserData from "./OrderSteps/ChangeUserData";
 import ChangePaymentType from "./OrderSteps/ChangePaymentType";
+import { useOrderStore } from "../../../store/useOrderStore";
+import { useCartStore } from "../../../store/useCartStore";
 
-const OrderLeft = () => {
+const OrderLeft = ({ setOpen }: { setOpen: (b: boolean) => void }) => {
   const currentUser = useUserStore((state) => state.currentUser);
+  const { orderInfo, createOrder } = useOrderStore();
+
+  const cartItems = useCartStore((state) => state.cartItems);
   if (!currentUser.id) return null;
 
   const [openedAccordeons, setOpenedAccordeons] = useState<number[]>([]);
@@ -22,6 +27,15 @@ const OrderLeft = () => {
       );
     } else {
       setOpenedAccordeons([...openedAccordeons, id]);
+    }
+  };
+
+  const handleSubmit = async () => {
+    const orderId = await createOrder(orderInfo, cartItems);
+
+    if (orderId) {
+      window.location.href = `/order/${orderId}`;
+      setOpen(false);
     }
   };
 
@@ -154,7 +168,10 @@ const OrderLeft = () => {
         </div>
       </div>
 
-      <Button className="rounded-none text-lg tracking-[0.04em] max-w-[350px] ml-auto w-full">
+      <Button
+        onClick={handleSubmit}
+        className="rounded-none text-lg tracking-[0.04em] max-w-[350px] ml-auto w-full"
+      >
         Оформить заказ
       </Button>
     </div>

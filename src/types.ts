@@ -43,3 +43,17 @@ export type SortByType = {
   priceFrom: number | null;
   priceTo: number | null;
 };
+
+export type OrderInfoType = {
+  city: string | null;
+  deliveryType: "Курьер" | "Самовывоз";
+  address: string | null;
+  time: string | null;
+  paymentType: "Card" | "Gpay" | "Cash";
+};
+
+export type OrderType = OrderInfoType & {
+  products: CartItemType[];
+  userId: number;
+  id: number;
+};

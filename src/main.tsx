@@ -11,6 +11,7 @@ import {
   Delivery,
   Favorites,
   Home,
+  Order,
   SignIn,
   SignUp,
   SingleProduct,
@@ -80,6 +81,10 @@ const router = createBrowserRouter([
       {
         path: "/blog/:id",
         element: <SinglePost />,
+      },
+      {
+        path: "/order/:id",
+        element: <Order />,
       },
     ],
   },

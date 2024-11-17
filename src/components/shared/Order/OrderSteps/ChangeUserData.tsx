@@ -3,7 +3,6 @@ import { useUserStore } from "../../../../store/useUserStore";
 
 const ChangeUserData = () => {
   const currentUser = useUserStore((state) => state.currentUser);
-  console.log(currentUser);
   return (
     <div className=" flex flex-start gap-[92px] text-left">
       <h6 className="text-xl font-bold w-1/3">Ваши данные</h6>

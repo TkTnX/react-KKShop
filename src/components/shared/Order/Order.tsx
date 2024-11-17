@@ -34,7 +34,7 @@ const Order = ({
         className="h-full p-0 flex flex-col overflow-y-auto scrollbar pr-2"
       >
         {/* TOP */}
-      <div className="flex items-center justify-between pt-8 px-5">
+        <div className="flex items-center justify-between pt-8 px-5">
           <button onClick={() => setOpen(false)}>
             <img src="/arrow-left-big.svg" alt="Back!" />
           </button>
@@ -50,7 +50,7 @@ const Order = ({
         <SheetDescription></SheetDescription>
         <div className="max-w-[1200px] mx-auto mt-20 flex items-start justify-between gap-[120px] ">
           {/* LEFT */}
-          <OrderLeft />
+          <OrderLeft setOpen={setOpen} />
           {/* RIGHT */}
           <OrderRight />
         </div>
