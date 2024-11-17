@@ -4,7 +4,7 @@ import { Sheet, SheetContent, SheetDescription, SheetTitle } from "../ui/sheet";
 import { cn } from "../../lib/utils";
 import { useUserStore } from "../../store/useUserStore";
 
-const ChooseCity = () => {
+const ChooseCity = ({ className }: { className: string }) => {
   const [openCity, setOpenCity] = useState(false);
   const { currentUser, handleChangeProfile } = useUserStore();
   const [currentCity, setCurrentCity] = useState(currentUser.city || "Москва");
@@ -25,7 +25,7 @@ const ChooseCity = () => {
     <>
       <button
         onClick={() => setOpenCity(!openCity)}
-        className="flex items-center text-xs sm:text-sm gap-1 sm:gap-3 min-w-[140px]"
+        className={`flex items-center text-xs sm:text-sm gap-1 sm:gap-3 min-w-[140px] ${className}`}
       >
         {currentCity}
         <img src="/arrow-down-pink.svg" alt="Open!" />

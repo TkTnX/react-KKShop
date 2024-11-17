@@ -156,3 +156,37 @@ export const ourShops = [
     phone: "+7 495 259 25 00",
   },
 ];
+
+export const OrderTimes = [
+  {
+    day: "Пн",
+    time: "10:00 - 20:00",
+  },
+  {
+    day: "Вт",
+    time: "10:00 - 20:00",
+  },
+  {
+    day: "Ср",
+    time: "10:00 - 20:00",
+  },
+  {
+    day: "Чт",
+    time: "10:00 - 20:00",
+  },
+  {
+    day: "Пт",
+    time: "10:00 - 20:00",
+  },
+];
+
+export const DeliveryTypes = [
+  {
+    name: "Доставка",
+    value: "delivery",
+  },
+  {
+    name: "Самовывоз",
+    value: "pickup",
+  },
+]
