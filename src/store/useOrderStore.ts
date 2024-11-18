@@ -55,12 +55,14 @@ export const useOrderStore = create<OrderStore>((set, get) => ({
     const currentUser = await fetchCurrentUser();
     if (!currentUser) return null;
     try {
+
       const newOrder = await axios.post(
         `${import.meta.env.VITE_MOKKY_URL}/orders`,
         {
           ...data,
           userId: currentUser.id,
           products,
+          totalPrice: currentUser.cartTotalPrice,
         }
       );
 
@@ -70,6 +72,7 @@ export const useOrderStore = create<OrderStore>((set, get) => ({
         `${import.meta.env.VITE_MOKKY_URL}/users/${currentUser.id}`,
         {
           cartItems: [],
+          cartTotalPrice: 0,
         }
       );
 

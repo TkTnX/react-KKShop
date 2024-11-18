@@ -27,6 +27,7 @@ export type UserType = {
   id: number | null;
   token?: string;
   favoritesItems: ProductType[] | null;
+  cartTotalPrice: number | null;
 };
 
 export type PostType = {
@@ -56,4 +57,5 @@ export type OrderType = OrderInfoType & {
   products: CartItemType[];
   userId: number;
   id: number;
+  totalPrice: number;
 };

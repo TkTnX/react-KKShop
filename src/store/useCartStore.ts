@@ -32,7 +32,11 @@ export const useCartStore = create<CartStore>((set, get) => ({
       }
       set({ cartItems: currentUser.cartItems });
 
-      changeTotalPrice({ set, cartItems: currentUser.cartItems });
+      await changeTotalPrice({
+        set,
+        cartItems: currentUser.cartItems,
+        userId: currentUser.id,
+      });
     } catch (error) {
       console.log(error);
       set({ error: true });
@@ -46,7 +50,7 @@ export const useCartStore = create<CartStore>((set, get) => ({
     try {
       set({ loading: true });
 
-      if (!currentUser) {
+      if (!currentUser ) {
         throw new Error("User not found");
       }
       const findProductInCart = get().cartItems.some(
@@ -77,7 +81,11 @@ export const useCartStore = create<CartStore>((set, get) => ({
           ...state,
           cartItems: newItems.data.cartItems,
         }));
-        changeTotalPrice({ set, cartItems: newItems.data.cartItems });
+        await changeTotalPrice({
+          set,
+          cartItems: newItems.data.cartItems,
+          userId: currentUser.id,
+        });
 
         //   если нет - добавляем
       } else {
@@ -95,7 +103,11 @@ export const useCartStore = create<CartStore>((set, get) => ({
           ...state,
           cartItems: newItems.data.cartItems,
         }));
-        changeTotalPrice({ set, cartItems: newItems.data.cartItems });
+        await changeTotalPrice({
+          set,
+          cartItems: newItems.data.cartItems,
+          userId: currentUser.id,
+        });
       }
     } catch (error) {
       console.log(error);
@@ -109,7 +121,7 @@ export const useCartStore = create<CartStore>((set, get) => ({
     const currentUser = await fetchCurrentUser();
     try {
       set({ loading: true });
-      if (!currentUser) {
+      if (!currentUser ) {
         throw new Error("User not found");
       }
       set({
@@ -129,7 +141,11 @@ export const useCartStore = create<CartStore>((set, get) => ({
         ...state,
         cartItems: newItems.data.cartItems,
       }));
-      changeTotalPrice({ set, cartItems: newItems.data.cartItems });
+      await changeTotalPrice({
+        set,
+        cartItems: newItems.data.cartItems,
+        userId: currentUser.id,
+      });
     } catch (error) {
       console.log(error);
       set({ error: true });
@@ -155,7 +171,11 @@ export const useCartStore = create<CartStore>((set, get) => ({
         }
       );
       set({ cartItems: res.data.cartItems });
-      changeTotalPrice({ set, cartItems: res.data.cartItems });
+      await changeTotalPrice({
+        set,
+        cartItems: res.data.cartItems,
+        userId: currentUser.id,
+      });
     } catch (error) {
       set({ error: true });
     } finally {
@@ -165,11 +185,11 @@ export const useCartStore = create<CartStore>((set, get) => ({
 
   increaseCount: async (product) => {
     const currentUser = await fetchCurrentUser();
+    if (!currentUser  ) {
+      throw new Error("User not found");
+    }
     try {
       set({ loading: true });
-      if (!currentUser) {
-        throw new Error("User not found");
-      }
 
       const res = await axios.patch(
         `${import.meta.env.VITE_MOKKY_URL}/users/${currentUser.id}`,
@@ -180,7 +200,7 @@ export const useCartStore = create<CartStore>((set, get) => ({
         }
       );
       set({ cartItems: res.data.cartItems });
-      changeTotalPrice({ set, cartItems: res.data.cartItems });
+      await changeTotalPrice({ set, cartItems: res.data.cartItems, userId: currentUser.id });
     } catch (error) {
       set({ error: true });
     } finally {
