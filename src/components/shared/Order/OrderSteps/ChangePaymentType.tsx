@@ -9,7 +9,7 @@ const ChangePaymentType = () => {
       <p className="text-sm">
         бесконтактная доставка действует для всех заказов, оплаченных онлайн
       </p>
-      <div className="flex items-center mt-2">
+      <div className="flex flex-col sm:flex-row items-center mt-2">
         <button
           onClick={() => changePaymentType("Card")}
           className={cn(

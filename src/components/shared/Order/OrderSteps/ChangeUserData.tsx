@@ -4,7 +4,7 @@ import { useUserStore } from "../../../../store/useUserStore";
 const ChangeUserData = () => {
   const currentUser = useUserStore((state) => state.currentUser);
   return (
-    <div className=" flex flex-start gap-[92px] text-left">
+    <div className=" flex flex-col sm:flex-row flex-start gap-3 md:gap-[92px] text-left">
       <h6 className="text-xl font-bold w-1/3">Ваши данные</h6>
       <div className="w-2/3 grid gap-4">
         {currentUser.name ? (
@@ -18,7 +18,9 @@ const ChangeUserData = () => {
           <Link to={"/profile"}>Добавить почту</Link>
         )}
         {currentUser.phoneNumber ? (
-          <p className="font-bold text-lg">Телефон: {currentUser.phoneNumber}</p>
+          <p className="font-bold text-lg">
+            Телефон: {currentUser.phoneNumber}
+          </p>
         ) : (
           <Link to={"/profile"}>Добавить телефон</Link>
         )}

@@ -5,9 +5,9 @@ const ChangeDeliveryType = () => {
   const changeDeliveryType = useOrderStore((state) => state.changeDeliveryType);
   const orderInfo = useOrderStore((state) => state.orderInfo);
   return (
-    <div className=" flex flex-start gap-[92px] ">
-      <h6 className="text-xl font-bold w-1/3">Способ доставки</h6>
-      <div className="flex items-center w-2/3">
+    <div className=" flex flex-col sm:flex-row flex-start gap-3 md:gap-[92px] ">
+      <h6 className="text-xl font-bold sm:w-1/3">Способ доставки</h6>
+      <div className="flex items-center sm:w-2/3">
         <button
           onClick={() => changeDeliveryType("delivery")}
           className={cn(" text-left p-2 border border-grey-light", {

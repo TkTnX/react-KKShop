@@ -13,15 +13,18 @@ const ChangeDate = () => {
   };
 
   return (
-    <div className=" flex flex-start gap-[92px] text-left">
+    <div className=" flex flex-col sm:flex-row flex-start gap-3 md:gap-[92px] text-left">
       <h6 className="text-xl font-bold w-1/3">Дата и время</h6>
-      <div className="w-2/3 flex items-center">
+      <div className="w-full md:w-2/3 flex items-center">
         {OrderTimes.map((time, index) => (
           <button
             onClick={() => handleChangeDate(index)}
-            className={cn(" text-left p-2 border border-grey-light flex flex-col", {
-              "border-black": selectedDate === index,
-            })}
+            className={cn(
+              " text-left p-2 border border-grey-light flex flex-col",
+              {
+                "border-black": selectedDate === index,
+              }
+            )}
             key={index}
           >
             <b className="font-bold">{time.day}</b>

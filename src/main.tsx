@@ -12,6 +12,7 @@ import {
   Favorites,
   Home,
   Order,
+  Purchases,
   SignIn,
   SignUp,
   SingleProduct,
@@ -49,6 +50,10 @@ const router = createBrowserRouter([
           {
             path: "/profile/favorites",
             element: <Favorites />,
+          },
+          {
+            path: "/profile/purchases",
+            element: <Purchases />,
           },
         ],
       },

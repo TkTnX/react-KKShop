@@ -10,6 +10,7 @@ import SignIn from "./SignIn.tsx";
 import ChangeProfile from "./ChangeProfile.tsx";
 import Favorites from "./Favorites.tsx";
 import Order from "./Order.tsx";
+import Purchases from "./Purchases.tsx";
 export {
   Home,
   Catalog,
@@ -23,4 +24,5 @@ export {
   ChangeProfile,
   Favorites,
   Order,
+  Purchases,
 };

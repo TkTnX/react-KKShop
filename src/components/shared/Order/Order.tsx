@@ -31,7 +31,7 @@ const Order = ({
       </SheetTrigger>
       <SheetContent
         side="top"
-        className="h-full p-0 flex flex-col overflow-y-auto scrollbar pr-2"
+        className="h-full p-0 flex flex-col overflow-y-auto md:scrollbar pr-2"
       >
         {/* TOP */}
         <div className="flex items-center justify-between pt-8 px-5">
@@ -48,15 +48,15 @@ const Order = ({
           </button>
         </div>
         <SheetDescription></SheetDescription>
-        <div className="max-w-[1200px] mx-auto mt-20 flex items-start justify-between gap-[120px] ">
+        <div className="max-w-[1200px] mx-auto mt-20 flex items-start justify-between gap-3 lg:gap-[120px] px-3 flex-col-reverse md:flex-row">
           {/* LEFT */}
           <OrderLeft setOpen={setOpen} />
           {/* RIGHT */}
           <OrderRight />
         </div>
         <SheetFooter className="bg-black text-white mt-auto">
-          <div className="container flex items-center justify-between py-11">
-            <div className="flex items-center gap-11">
+          <div className="container flex items-center md:justify-between py-11 flex-wrap gap-3 justify-center flex-col vsm:flex-row">
+            <div className="flex items-center gap-11 flex-col vsm:flex-row">
               <div className="grid gap-1">
                 <p className="text-[#acacac]">служба поддержки 24/7</p>
                 <a

@@ -18,6 +18,7 @@ interface OrderStore {
     products: ProductType[]
   ) => Promise<number>;
   fetchOneOrder: (id: string) => Promise<OrderType>;
+  fetchUserOrders: (userId: number) => Promise<OrderType[]>;
 }
 
 export const useOrderStore = create<OrderStore>((set, get) => ({
@@ -65,6 +66,13 @@ export const useOrderStore = create<OrderStore>((set, get) => ({
 
       if (!newOrder.data) throw new Error("Order not created");
 
+      await axios.patch(
+        `${import.meta.env.VITE_MOKKY_URL}/users/${currentUser.id}`,
+        {
+          cartItems: [],
+        }
+      );
+
       return newOrder.data.id;
     } catch (error) {
       console.log(error);
@@ -79,6 +87,22 @@ export const useOrderStore = create<OrderStore>((set, get) => ({
       );
 
       return order.data;
+    } catch (error) {
+      console.log(error);
+      set({ error: true });
+    } finally {
+      set({ loading: false });
+    }
+  },
+
+  fetchUserOrders: async (userId) => {
+    try {
+      set({ loading: true });
+      const orders = await axios.get(
+        `${import.meta.env.VITE_MOKKY_URL}/orders?userId=${userId}`
+      );
+
+      return orders.data;
     } catch (error) {
       console.log(error);
       set({ error: true });

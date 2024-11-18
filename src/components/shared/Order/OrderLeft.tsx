@@ -3,14 +3,17 @@ import { Button } from "../../ui/button";
 import { useState } from "react";
 import { cn } from "../../../lib/utils";
 import { useUserStore } from "../../../store/useUserStore";
-import ChangeCity from "./OrderSteps/ChangeCity";
-import ChangeDeliveryType from "./OrderSteps/ChangeDeliveryType";
-import ChangeAddress from "./OrderSteps/ChangeAddress";
-import ChangeDate from "./OrderSteps/ChangeDate";
-import ChangeUserData from "./OrderSteps/ChangeUserData";
-import ChangePaymentType from "./OrderSteps/ChangePaymentType";
+import {
+  ChangeAddress,
+  ChangeCity,
+  ChangeDate,
+  ChangeDeliveryType,
+  ChangePaymentType,
+  ChangeUserData,
+} from "./OrderSteps";
 import { useOrderStore } from "../../../store/useOrderStore";
 import { useCartStore } from "../../../store/useCartStore";
+import { toast } from "react-toastify";
 
 const OrderLeft = ({ setOpen }: { setOpen: (b: boolean) => void }) => {
   const currentUser = useUserStore((state) => state.currentUser);
@@ -31,6 +34,9 @@ const OrderLeft = ({ setOpen }: { setOpen: (b: boolean) => void }) => {
   };
 
   const handleSubmit = async () => {
+    if (!orderInfo.address) return toast.error("Пожалуйста, укажите адрес");
+    if (!orderInfo.city) return toast.error("Пожалуйста, укажите город");
+
     const orderId = await createOrder(orderInfo, cartItems);
 
     if (orderId) {
@@ -40,7 +46,7 @@ const OrderLeft = ({ setOpen }: { setOpen: (b: boolean) => void }) => {
   };
 
   return (
-    <div className="w-2/3 flex flex-col gap-14 ">
+    <div className="w-full md:w-auto lg:w-2/3 flex flex-col gap-14">
       {/* 1/3 */}
       <div>
         <div className=" flex items-start gap-10 group ">

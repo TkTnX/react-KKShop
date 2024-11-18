@@ -6,7 +6,7 @@ const OrderRight = () => {
   const deliveryType = useOrderStore(state => state.orderInfo.deliveryType);
 
   return (
-    <div className=" w-1/3">
+    <div className=" lg:w-1/3">
       <div className="flex items-center justify-between">
         <div>
           <b className="text-2xl font-bold">Ваш заказ</b> / 1 шт.

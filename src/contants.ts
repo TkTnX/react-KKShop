@@ -114,6 +114,10 @@ export const profileMenuItems = [
     link: "/profile",
   },
   {
+    name: "ваши покупки",
+    link: "/profile/purchases",
+  },
+  {
     name: "избранное",
     link: "/profile/favorites",
   },

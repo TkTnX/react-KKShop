@@ -4,7 +4,7 @@ import ChangeAddressMenu from "./ChangeAddressMenu";
 const ChangeAddress = () => {
   const orderInfo = useOrderStore((state) => state.orderInfo);
   return (
-    <div className=" flex flex-start gap-[92px] text-left">
+    <div className=" flex flex-col sm:flex-row flex-start gap-3 md:gap-[92px] text-left">
       <h6 className="text-xl font-bold w-1/3">Адрес</h6>
       <div className="w-2/3">
         {!orderInfo.address ? (
