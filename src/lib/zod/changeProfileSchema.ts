@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 export const changeProfileSchema = z.object({
-  name: z.string().optional(),
+  name: z.string().max(15, "Максимум 15 символов").optional(),
   email: z.string().optional(),
   password: z.string().optional(),
   avatarUrl: z.string().optional(),

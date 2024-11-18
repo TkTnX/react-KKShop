@@ -28,7 +28,7 @@ body {
 
 .hero {
   background-color: #999;
-  background-image: url("/hero-bg.jpg");
+  background-image: url("/hero-bg.webp");
   background-position: center center; /* x y */
   background-size: cover;
   background-repeat: no-repeat;

@@ -31,7 +31,7 @@ const Header = () => {
       </div>
       {/* BOTTOM */}
       <div className="container flex flex-col gap-3 vsm:gap-0 vsm:flex-row items-center justify-between mt-8">
-        <div className="  flex items-center gap-10 xl:gap-12">
+        <div className="w-full justify-between vsm:w-auto vsm:justify-normal  flex items-center gap-10 xl:gap-12">
           {/* MOBILE MENU */}
 
           <MobileMenu />

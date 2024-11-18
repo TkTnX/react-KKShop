@@ -10,7 +10,6 @@ const Order = () => {
   const { fetchOneOrder, loading } = useOrderStore();
   const location = useLocation();
   const id = location.pathname.split("/")[2];
-
   useEffect(() => {
     const fetchOrder = async () => {
       const order = await fetchOneOrder(id);
@@ -18,6 +17,16 @@ const Order = () => {
     };
     fetchOrder();
   }, [id]);
+
+  if (order && currentUser.id !== order?.id)
+    return (
+      <div className="container text-center mt-32">
+        <p className="text-pink text-lg">
+          Заказ не найден или у вас нет доступа к этому заказу
+        </p>
+        <Link to="/">Вернуться на главную</Link>
+      </div>
+    );
 
   if (loading)
     return <p className="text-pink text-center text-lg">Загрузка...</p>;

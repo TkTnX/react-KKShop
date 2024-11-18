@@ -14,7 +14,7 @@ const ChangeDate = () => {
 
   return (
     <div className=" flex flex-col sm:flex-row flex-start gap-3 md:gap-[92px] text-left">
-      <h6 className="text-xl font-bold w-1/3">Дата и время</h6>
+      <h6 className="text-xl font-bold sm:w-1/3">Дата и время</h6>
       <div className="w-full md:w-2/3 flex items-center">
         {OrderTimes.map((time, index) => (
           <button

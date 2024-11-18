@@ -46,6 +46,7 @@ const MobileMenu = () => {
   return (
     <>
       <button
+        aria-label="toggle menu"
         onClick={() => setOpen(!open)}
         className="w-10 h-8 flex flex-col justify-between relative z-50 xl:hidden"
       >

@@ -27,6 +27,7 @@ const ChangeProfileForm = ({ profileInfo }: { profileInfo: UserType }) => {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm({
     resolver: zodResolver(changeProfileSchema),
     defaultValues: {
@@ -48,6 +49,8 @@ const ChangeProfileForm = ({ profileInfo }: { profileInfo: UserType }) => {
           birthdayDate: date?.toLocaleDateString("ru-RU"),
         };
         await handleChangeProfile(dataWithBirthdayDate);
+        reset();
+        setCheckboxActivated(false)
         toast.success("Профиль успешно обновлен!");
       } else {
         toast.error("Дайте согласие на обработку своих персональных данных");
@@ -79,7 +82,11 @@ const ChangeProfileForm = ({ profileInfo }: { profileInfo: UserType }) => {
             )}
           >
             <CalendarIcon />
-            {date ? format(date, "PPP") : <span className="text-grey">Ваша дата рождения</span>}
+            {date ? (
+              format(date, "PPP")
+            ) : (
+              <span className="text-grey">Ваша дата рождения</span>
+            )}
           </Button>
         </PopoverTrigger>
         <PopoverContent className="w-auto p-0">
@@ -91,7 +98,12 @@ const ChangeProfileForm = ({ profileInfo }: { profileInfo: UserType }) => {
           />
         </PopoverContent>
       </Popover>
-      <Input {...register("password")} type="password" placeholder="Пароль" autoComplete="off" />
+      <Input
+        {...register("password")}
+        type="password"
+        placeholder="Пароль"
+        autoComplete="off"
+      />
       {errors.password && <p className="text-red">{errors.password.message}</p>}
 
       <Input
@@ -123,7 +135,7 @@ const ChangeProfileForm = ({ profileInfo }: { profileInfo: UserType }) => {
         className="border p-2 rounded text-grey text-sm"
         defaultValue={profileInfo.city || ""}
       >
-        <option value={""} hidden >
+        <option value={""} hidden>
           Ваш город
         </option>
         {cities.map((city) => (
@@ -138,15 +150,16 @@ const ChangeProfileForm = ({ profileInfo }: { profileInfo: UserType }) => {
         <input
           onChange={() => setCheckboxActivated(!checkboxActivated)}
           type="checkbox"
+          checked={checkboxActivated}
         />
         <p className="text-xs">
           Я даю согласие на обработку своих персональных данных в соответсвии с{" "}
           <a className="text-pink" href="#!">
             Политикой в отношении обработки персональных данных
-          </a>
-          {" "}и{" "}
+          </a>{" "}
+          и{" "}
           <a className="text-pink" href="#!">
-             Пользовательским соглашением.
+            Пользовательским соглашением.
           </a>
         </p>
       </div>

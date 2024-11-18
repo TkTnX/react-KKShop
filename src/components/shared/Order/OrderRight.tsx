@@ -1,17 +1,19 @@
 import { useCartStore } from "../../../store/useCartStore";
 import { useOrderStore } from "../../../store/useOrderStore";
 
-const OrderRight = () => {
+const OrderRight = ({ setOpen }: { setOpen: (b: boolean) => void }) => {
   const { cartItems, totalPrice } = useCartStore();
-  const deliveryType = useOrderStore(state => state.orderInfo.deliveryType);
+  const deliveryType = useOrderStore((state) => state.orderInfo.deliveryType);
 
   return (
-    <div className=" lg:w-1/3">
-      <div className="flex items-center justify-between">
+    <div className="w-full lg:w-1/3">
+      <div className="flex items-center justify-between gap-2">
         <div>
           <b className="text-2xl font-bold">Ваш заказ</b> / 1 шт.
         </div>
-        <button className="text-grey">Изменить</button>
+        <button onClick={() => setOpen(false)} className="text-grey">
+          Изменить
+        </button>
       </div>
       {/* ITEMS */}
       <div className="mt-6 flex items-center gap-3 overflow-x-auto scrollbar pb-2">
@@ -44,6 +46,6 @@ const OrderRight = () => {
       </div>
     </div>
   );
-}
+};
 
-export default OrderRight
+export default OrderRight;

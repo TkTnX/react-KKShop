@@ -35,6 +35,9 @@ const Cart = ({ children }: { children: React.ReactNode }) => {
         )}
       </SheetTrigger>
       <SheetContent className="w-full sm:min-w-[640px] lg:min-w-[860px] lg:px-[104px] overflow-y-auto">
+      <button className="absolute right-3 sm:right-12 top-8" onClick={() => setOpen(false)}>
+        <img src="/x-md.svg" alt="CLOSE" />
+      </button>
         {error && currentUser.id && (
           <p className="text-red">Произошла ошибка</p>
         )}

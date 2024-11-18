@@ -31,7 +31,7 @@ const Order = ({
       </SheetTrigger>
       <SheetContent
         side="top"
-        className="h-full p-0 flex flex-col overflow-y-auto md:scrollbar pr-2"
+        className="h-full p-0 flex flex-col overflow-y-auto md:scrollbar "
       >
         {/* TOP */}
         <div className="flex items-center justify-between pt-8 px-5">
@@ -39,7 +39,7 @@ const Order = ({
             <img src="/arrow-left-big.svg" alt="Back!" />
           </button>
           <Link onClick={handleCloseAll} to="/">
-            <img src="/logoLg.png" alt="Logo" />
+            <img className="max-w-[150px] vsm:w-auto vsm:h-auto" src="/logoLg.png" alt="Logo" />
           </Link>
           <button onClick={handleCloseAll}>
             <SheetTitle>
@@ -52,7 +52,7 @@ const Order = ({
           {/* LEFT */}
           <OrderLeft setCloseCartModal={setCloseCartModal} setOpen={setOpen} />
           {/* RIGHT */}
-          <OrderRight />
+          <OrderRight setOpen={setOpen} />
         </div>
         <SheetFooter className="bg-black text-white mt-auto">
           <div className="container flex items-center md:justify-between py-11 flex-wrap gap-3 justify-center flex-col vsm:flex-row">
@@ -76,7 +76,7 @@ const Order = ({
                 </a>
               </div>
             </div>
-            <div className="flex items-center gap-7">
+            <div className="flex flex-col vsm:flex-row items-center gap-7">
               <a className="text-[#acacac] hover:text-white" href="#!">
                 заказы и доставка
               </a>

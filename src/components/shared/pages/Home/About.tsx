@@ -10,7 +10,7 @@ const About = () => {
           animate={{ x: 0, opacity: 1 }}
           initial={{ x: -100, opacity: 0 }}
         >
-          <img src="/about.jpg" alt="About img" />
+          <img src="/about.webp" alt="About img" />
         </motion.div>
         <motion.div
           animate={{ x: 0, opacity: 1 }}

@@ -42,8 +42,12 @@ const Purchases = () => {
               <p>{order.address}</p>
             </div>
             <div className="max-w-20">
-                    <img src={order.products[0].img} alt={order.products[0].title} />
-                    <p className="text-xs text-pink">{order.products.length - 1} ещё</p>
+              <img src={order.products[0].img} alt={order.products[0].title} />
+              {order.products.length - 1 > 0 && (
+                <p className="text-xs text-pink">
+                  {order.products.length - 1} ещё
+                </p>
+              )}
             </div>
           </Link>
         ))}

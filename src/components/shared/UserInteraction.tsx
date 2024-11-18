@@ -7,8 +7,9 @@ import { Link } from "react-router-dom";
 const UserInteraction = () => {
   const currentUser = useUserStore((state) => state.currentUser);
   const favorites = useFavoritesStore((state) => state.favorites);
+
   return (
-    <ul className="flex items-center gap-5">
+    <ul className="mt-5 vsm:mt-0 flex items-center gap-5">
       <li>
         <button>
           <img src="/search.svg" alt="Search" />
@@ -16,11 +17,11 @@ const UserInteraction = () => {
       </li>
       <li className="h-[31px] relative">
         <Link to="/profile/favorites">
-        {favorites.length > 0 && (
-          <Badge className="absolute -right-2 -top-2 w-[13px]  flex items-center justify-center text-xs ">
-            {favorites.length}
-          </Badge>
-        )}
+          {favorites.length > 0 && (
+            <Badge className="absolute -right-2 -top-2 w-[13px]  flex items-center justify-center text-xs ">
+              {favorites.length}
+            </Badge>
+          )}
           <img src="/heart.svg" alt="Favorite" />
         </Link>
       </li>

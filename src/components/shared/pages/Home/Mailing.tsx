@@ -4,7 +4,7 @@ const Mailing = () => {
 
       <div className="flex items-center gap-14 relative z-10 flex-col lg:flex-row">
         <div>
-          <img src="/mailing.jpg" alt="Mailing" />
+          <img src="/mailing.webp" alt="Mailing" />
         </div>
         <div className=" lg:max-w-[530px]">
           <h4 className="text-3xl md:text-5xl">Подпишитесь на рассылку</h4>

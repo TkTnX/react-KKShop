@@ -19,11 +19,11 @@ const ProfileLayout = () => {
   return (
     <div className="container mt-24 flex flex-col xl:flex-row items-start justify-between gap-10">
       {/* LEFT */}
-      <div>
+      <div className="min-w-[300px]">
         <div className="flex items-center gap-4">
           <h4 className="text-3xl xl:max-w-28">{currentUser.name}</h4>
           <img
-            className="rounded-full w-[50px] sm:w-[100px] h-[50px] sm:h-[100px] object-cover"
+            className="rounded-full w-[50px] sm:w-[100px] h-[50px] sm:h-[100px] object-cover ml-2"
             src={currentUser.avatarUrl || "/avatar.svg"}
             alt="Avatar"
           />
