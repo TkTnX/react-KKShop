@@ -14,9 +14,11 @@ import {
 import { useOrderStore } from "../../../store/useOrderStore";
 import { useCartStore } from "../../../store/useCartStore";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const OrderLeft = ({ setOpen }: { setOpen: (b: boolean) => void }) => {
   const currentUser = useUserStore((state) => state.currentUser);
+  const navigate = useNavigate();
   const { orderInfo, createOrder } = useOrderStore();
 
   const cartItems = useCartStore((state) => state.cartItems);
@@ -39,12 +41,10 @@ const OrderLeft = ({ setOpen }: { setOpen: (b: boolean) => void }) => {
 
     const orderId = await createOrder(orderInfo, cartItems);
 
-    setTimeout(() => {
-      if (orderId) {
-        window.location.href = `/profile/purchases`;
-        setOpen(false);
-      }
-    }, 500);
+    if (orderId) {
+      navigate(`/order/${orderId}`);
+      setOpen(false);
+    }
   };
 
   return (
