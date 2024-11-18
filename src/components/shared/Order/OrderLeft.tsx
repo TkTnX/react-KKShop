@@ -39,10 +39,12 @@ const OrderLeft = ({ setOpen }: { setOpen: (b: boolean) => void }) => {
 
     const orderId = await createOrder(orderInfo, cartItems);
 
-    if (orderId) {
-      window.location.href = `/order/${orderId}`;
-      setOpen(false);
-    }
+    setTimeout(() => {
+      if (orderId) {
+        window.location.href = `/order/${orderId}`;
+        setOpen(false);
+      }
+    }, 500);
   };
 
   return (
