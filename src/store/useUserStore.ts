@@ -28,6 +28,7 @@ export const useUserStore = create<UserStore>((set, get) => ({
     phoneNumber: null,
     city: null,
     favoritesItems: null,
+    cartTotalPrice: 0,
   },
   loading: false,
   error: false,
@@ -117,6 +118,7 @@ export const useUserStore = create<UserStore>((set, get) => ({
         phoneNumber: null,
         city: null,
         favoritesItems: null,
+        cartTotalPrice: 0,
       },
     });
   },

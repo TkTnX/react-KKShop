@@ -21,7 +21,7 @@ const PriceDropdown = ({
     sortBy.priceFrom || 0,
     sortBy.priceTo || 10000,
   ]);
-  const [isSearching, setIsSearching] = useState(false);
+  const [_, setIsSearching] = useState(false);
   const debouncedSearchTerm = useDebounce(range, 1000);
   const handleRangeChange = (value: number[]) => {
     setRange(value);

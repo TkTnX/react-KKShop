@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { PostType } from "../../../types";
+import { PostType } from "../../../../types";
 
 const Post = ({ post }: { post: PostType }) => {
   return (

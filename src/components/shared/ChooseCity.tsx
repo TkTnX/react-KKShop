@@ -5,7 +5,7 @@ import { cn } from "../../lib/utils";
 import { useUserStore } from "../../store/useUserStore";
 import { useOrderStore } from "../../store/useOrderStore";
 
-const ChooseCity = ({ className }: { className: string }) => {
+const ChooseCity = ({ className }: { className?: string }) => {
   const [openCity, setOpenCity] = useState(false);
   const changeCity = useOrderStore((state) => state.changeCity);
   const { currentUser, handleChangeProfile } = useUserStore();
