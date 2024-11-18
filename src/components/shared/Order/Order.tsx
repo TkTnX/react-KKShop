@@ -50,7 +50,7 @@ const Order = ({
         <SheetDescription></SheetDescription>
         <div className="max-w-[1200px] mx-auto mt-20 flex items-start justify-between gap-3 lg:gap-[120px] px-3 flex-col-reverse md:flex-row">
           {/* LEFT */}
-          <OrderLeft setOpen={setOpen} />
+          <OrderLeft setCloseCartModal={setCloseCartModal} setOpen={setOpen} />
           {/* RIGHT */}
           <OrderRight />
         </div>

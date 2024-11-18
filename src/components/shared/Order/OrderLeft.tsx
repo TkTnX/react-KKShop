@@ -16,7 +16,13 @@ import { useCartStore } from "../../../store/useCartStore";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
-const OrderLeft = ({ setOpen }: { setOpen: (b: boolean) => void }) => {
+const OrderLeft = ({
+  setOpen,
+  setCloseCartModal,
+}: {
+  setOpen: (b: boolean) => void;
+  setCloseCartModal: (b: boolean) => void;
+}) => {
   const currentUser = useUserStore((state) => state.currentUser);
   const navigate = useNavigate();
   const { orderInfo, createOrder } = useOrderStore();
@@ -44,6 +50,7 @@ const OrderLeft = ({ setOpen }: { setOpen: (b: boolean) => void }) => {
     if (orderId) {
       navigate(`/order/${orderId}`);
       setOpen(false);
+      setCloseCartModal(false);
     }
   };
 
