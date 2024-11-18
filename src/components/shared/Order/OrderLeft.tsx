@@ -41,7 +41,7 @@ const OrderLeft = ({ setOpen }: { setOpen: (b: boolean) => void }) => {
 
     setTimeout(() => {
       if (orderId) {
-        window.location.href = `/order/${orderId}`;
+        window.location.href = `/profile/purchases`;
         setOpen(false);
       }
     }, 500);
